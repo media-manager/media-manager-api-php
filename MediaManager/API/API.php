@@ -4,6 +4,7 @@ namespace MediaManager\API;
 
 use \MediaManager\HTTP\HTTP as HTTP;
 use \MediaManager\Pager\Pager as Pager;
+use \MediaManager\Analytics\Analytics as Analytics;
 
 /**
  * Description of API
@@ -17,6 +18,12 @@ class API {
      * @var HTTP 
      */
     private $HTTP;
+
+    /**
+     *
+     * @var Analytics 
+     */
+    private $Analytics;
 
     /**
      * The Client Shortname
@@ -67,6 +74,17 @@ class API {
 
         //SET THE API KEY TO BE PASSED TO ALL REQUESTS.
         $this->HTTP->setGlobalParams(array("_apikey" => $apiKey));
+
+        //THE ANALYTICS BUILDER
+        $this->Analytics = new Analytics($this->BASE_URI, $this->HTTP);
+    }
+
+    /**
+     * Get the Analytics object
+     * @return type
+     */
+    public function Analytics() {
+        return $this->Analytics;
     }
 
     /**
@@ -155,7 +173,7 @@ class API {
 
         //GET CLIENT DATA
         $response = $this->HTTP->Get($this->BASE_URI . $api);
-        
+
         return new Pager($response);
     }
 
