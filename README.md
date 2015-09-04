@@ -38,7 +38,7 @@ $videos = $MediaManager->API->getVideo("{videoid}");
 
 ## Analytics
 
-You can get your accounts analytics also.
+You can also query your analytics.
 
 ```php
 //QUERY ANALYTICS
