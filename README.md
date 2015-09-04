@@ -14,7 +14,7 @@ $MediaManager = new \MediaManager\MediaManager("{shortname}", "{apikey}");
 
 ## Client
 
-You can get your client data by using the getClient method.
+You can get your client data by using the `getClient` method.
 
 ```php
 $client = $MediaManager->API->getClient();
@@ -30,7 +30,7 @@ You can get all your videos or a single video.
 $videos = $MediaManager->API->getVideos();
 ```
 
-Some API calls will return paged content. So the getVideos method will be returned as a `MediaManager\Pager\Pager` object. This can be easily iterated using a simple loop.
+Some API calls will return paged content. So the `getVideos` method will be returned as a `MediaManager\Pager\Pager` object. This can be easily iterated using a simple loop.
 
 ```php
 foreach($videos as $key => $video){
