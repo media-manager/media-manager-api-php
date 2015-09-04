@@ -36,6 +36,15 @@ $videos = $MediaManager->API->getVideos();
 $videos = $MediaManager->API->getVideo("{videoid}");
 ```
 
+## Analytics
+
+You can get your accounts analytics also.
+
+```php
+//QUERY ANALYTICS
+$query = $MediaManager->API->Analytics()->Query("{query}", "{from}", "{to}");
+```
+
 ## Filtering
 
 You can also filter down the content returned by the API.
