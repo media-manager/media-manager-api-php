@@ -3,6 +3,7 @@
 namespace MediaManager\API;
 
 use \MediaManager\HTTP\HTTP as HTTP;
+use \MediaManager\Pager\Pager as Pager;
 
 /**
  * Description of API
@@ -154,8 +155,8 @@ class API {
 
         //GET CLIENT DATA
         $response = $this->HTTP->Get($this->BASE_URI . $api);
-
-        return $response;
+        
+        return new Pager($response);
     }
 
 }
