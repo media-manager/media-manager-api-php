@@ -80,6 +80,12 @@ class HTTP {
         
         //IF VALID JSON, THEN RETURN THAT
         if (!is_null($json)) {
+            
+            //IF AN ERROR HAS HAPPEND
+            if(isset($json["error"])){
+               throw Exception($json["error"]["message"], $json["error"]["code"]);
+            }
+            
             return $json;
         }
 
