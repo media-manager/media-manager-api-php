@@ -45,6 +45,16 @@ You can also query your analytics.
 $query = $MediaManager->API->Analytics()->Query("{query}", "{from}", "{to}");
 ```
 
+**Dates**
+
+Dates can be in pretty much any format as long as they are a valid date.
+
+```
+2015-09-01
+1st Jan 2015
+etc..
+```
+
 ## Filtering
 
 You can also filter down the content returned by the API.
