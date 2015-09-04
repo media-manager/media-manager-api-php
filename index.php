@@ -17,5 +17,3 @@ $MediaManager->API->addTemplateFilter("{template}");
 //GET CLIENT
 $videos = $MediaManager->API->getVideos();
 
-
-var_dump($videos);
