@@ -57,7 +57,13 @@ etc..
 
 **Query Language**
 
-You can make use of the Media Manager Markup Langauge (MMML) or you can use the `QueryBuilder`.
+You can make use of the Media Manager Markup Langauge (MMML) or you can use the `QueryBuilder`. So using the MMML we can use the most basic query.
+
+```
+//QUERY ANALYTICS
+$query = $MediaManager->API->Analytics()->Query("SHOW Video", "2015-08-04", "2015-09-04");
+```
+
 
 ## Filtering
 
