@@ -35,3 +35,31 @@ $videos = $MediaManager->API->getVideos();
 ```php
 $videos = $MediaManager->API->getVideo("{videoid}");
 ```
+
+### Filtering
+
+You can also filter down the content returned by the API.
+
+```php
+//ADD TEMPLATE FILTER
+$MediaManager->API->addTemplateFilter("5409d798140ba0a47c8b4604");
+
+//GET VIDEOS
+$videos = $MediaManager->API->getVideos();
+```
+
+So this filter allows you to only return videos that are published to a given template. You can continue to add other filters.
+
+```php
+//ADD TEMPLATE FILTER
+$MediaManager->API->addTemplateFilter("5409d798140ba0a47c8b4604");
+
+//ADD PLAYLIST FILTER
+$MediaManager->API->addPlaylistFilter("53d90f56150ba0996c8b4608");
+
+//GET VIDEOS
+$videos = $MediaManager->API->getVideos();
+```
+
+So now we only want to return videos that are published to a given template, but also published to a given playlist.
+
