@@ -24,13 +24,13 @@ $client = $MediaManager->API->getClient();
 
 You can get all your videos or a single video.
 
-***Getting all videos***
+**Getting all videos**
 
 ```php
 $videos = $MediaManager->API->getVideos();
 ```
 
-***Getting a video***
+**Getting a video**
 
 ```php
 $videos = $MediaManager->API->getVideo("{videoid}");
@@ -54,6 +54,10 @@ Dates can be in pretty much any format as long as they are a valid date.
 1st Jan 2015
 etc..
 ```
+
+**Query Language**
+
+You can make use of the Media Manager Markup Langauge (MMML) or you can use the `QueryBuilder`.
 
 ## Filtering
 
