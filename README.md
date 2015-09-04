@@ -42,7 +42,7 @@ You can also filter down the content returned by the API.
 
 ```php
 //ADD TEMPLATE FILTER
-$MediaManager->API->addTemplateFilter("5409d798140ba0a47c8b4604");
+$MediaManager->API->addTemplateFilter("{template}");
 
 //GET VIDEOS
 $videos = $MediaManager->API->getVideos();
@@ -52,10 +52,10 @@ So this filter allows you to only return videos that are published to a given te
 
 ```php
 //ADD TEMPLATE FILTER
-$MediaManager->API->addTemplateFilter("5409d798140ba0a47c8b4604");
+$MediaManager->API->addTemplateFilter("{template}");
 
 //ADD PLAYLIST FILTER
-$MediaManager->API->addPlaylistFilter("53d90f56150ba0996c8b4608");
+$MediaManager->API->addPlaylistFilter("{playlist}");
 
 //GET VIDEOS
 $videos = $MediaManager->API->getVideos();
