@@ -30,21 +30,13 @@ You can get all your videos or a single video.
 $videos = $MediaManager->API->getVideos();
 ```
 
-Some API calls will return paged content. So the `getVideos` method will be returned as a `MediaManager\Pager\Pager` object. This can be easily iterated using a simple loop.
-
-```php
-foreach($videos as $key => $video){
-   
-}
-```
-
 ### Getting a video
 
 ```php
 $videos = $MediaManager->API->getVideo("{videoid}");
 ```
 
-### Filtering
+## Filtering
 
 You can also filter down the content returned by the API.
 
@@ -70,4 +62,30 @@ $videos = $MediaManager->API->getVideos();
 ```
 
 So now we only want to return videos that are published to a given template, but also published to a given playlist.
+
+## Paging
+
+Some API calls will return paged content. So the `getVideos` method will be returned as a `MediaManager\Pager\Pager` object. This can be easily iterated using a simple loop.
+
+```php
+//GET VIDEOS
+$videos = $MediaManager->API->getVideos();
+
+//LOOP THROUGH FIRST PAGE
+foreach($videos as $key => $video){
+   
+}
+```
+
+### Pager filters
+
+Sometimes you may want to change the pager filters. For instance if you wanted to limit the number of items returned.
+
+```php
+//ADD A PAGE FILER
+$MediaManager->API->addFilter("perPage","10");
+
+//GET VIDEOS
+$videos = $MediaManager->API->getVideos();
+```
 
