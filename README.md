@@ -24,13 +24,13 @@ $client = $MediaManager->API->getClient();
 
 You can get all your videos or a single video.
 
-### Getting all videos
+***Getting all videos***
 
 ```php
 $videos = $MediaManager->API->getVideos();
 ```
 
-### Getting a video
+***Getting a video***
 
 ```php
 $videos = $MediaManager->API->getVideo("{videoid}");
@@ -77,7 +77,7 @@ foreach($videos as $key => $video){
 }
 ```
 
-### Pager filters
+***Pager filters***
 
 Sometimes you may want to change the pager filters. For instance if you wanted to limit the number of items returned.
 
