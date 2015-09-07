@@ -64,7 +64,31 @@ You can make use of the Media Manager Markup Langauge (MMML) or you can use the 
 $query = $MediaManager->API->Analytics()->Query("SHOW Video", "2015-08-04", "2015-09-04");
 ```
 
-**Note: all analytics requests will be returned as paged so will make use of `MediaManager\Pager\Pager`.**
+**Query Builder**
+
+You can also make use of the Query Builder.
+
+```php
+$Query = new MediaManager\Analytics\Query();
+```
+
+You can then pass this into the `Query` method.
+
+```php
+$query = $MediaManager->API->Analytics()->Query($Query, "2015-08-04", "2015-09-04");
+```
+
+This will perform the most simple query, which would be `SHOW Video`. You can build on the query builder and add conditions and so on.
+
+```php
+$Show = $Query->Show;
+```
+
+You can then add conditions to the `SHOW`.
+
+```php
+$Show->Condition("title", "hello world");
+```
 
 ## Filtering
 
