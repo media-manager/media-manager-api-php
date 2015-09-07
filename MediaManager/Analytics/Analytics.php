@@ -16,13 +16,13 @@ class Analytics {
      * @var string
      */
     private $API_URL;
-    
+
     /**
      * The HTTP Object
      * @var HTTP
      */
     private $HTTP;
-    
+
     /**
      * New query Object
      * @param type $apiURL
@@ -32,7 +32,7 @@ class Analytics {
         $this->API_URL = $apiURL;
         $this->HTTP = $HTTP;
     }
-    
+
     /**
      * Run a query on the analytics
      * @param type $query
