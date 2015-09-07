@@ -20,6 +20,16 @@ You can get your client data by using the `getClient` method.
 $client = $MediaManager->API->getClient();
 ```
 
+## Templates
+
+**Getting all templates**
+
+You can get all templates attached to your account.
+
+```php
+$videos = $MediaManager->API->getTemplates();
+```
+
 ## Videos
 
 You can get all your videos or a single video.
