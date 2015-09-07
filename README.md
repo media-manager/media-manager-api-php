@@ -84,7 +84,7 @@ This will perform the most simple query, which would be `SHOW Video`. You can bu
 $Show = $Query->Show;
 ```
 
-You can then add conditions to the `SHOW`.
+*Add condition*
 
 ```php
 $Show->Condition("title", "hello world");
