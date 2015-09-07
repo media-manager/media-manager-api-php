@@ -102,6 +102,14 @@ By default the conditon will use the opreator `IS`. This can be changed by passi
 $Show->Condition("title", "hello world", "ISNOT");
 ```
 
+When you have more than one conditon on a query a operator is used to seperate them. There are two options `AND`, `OR`. By default `AND` is used. This can be changed by setting the `Logical` method.
+
+```php
+$Show->Condition("title", "new")->Logical("OR");
+$Show->Condition("title", "manager")->Logical("OR");
+$Show->Condition("title", "test");
+```
+
 ## Filtering
 
 You can also filter down the content returned by the API.
