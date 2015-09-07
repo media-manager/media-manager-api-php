@@ -84,10 +84,16 @@ This will perform the most simple query, which would be `SHOW Video`. You can bu
 $Show = $Query->Show;
 ```
 
-*Add condition*
+**Adding condition***
 
 ```php
 $Show->Condition("title", "hello world");
+```
+
+By default the conditon will use the opreator `IS`. This can be changed by passing a third parameter.
+
+```php
+$Show->Condition("title", "hello world", "ISNOT");
 ```
 
 ## Filtering
