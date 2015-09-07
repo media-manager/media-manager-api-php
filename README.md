@@ -30,6 +30,16 @@ You can get all templates attached to your account.
 $videos = $MediaManager->API->getTemplates();
 ```
 
+## Playlists
+
+**Getting all playlists**
+
+You can get all playlists attached to your account.
+
+```php
+$videos = $MediaManager->API->getPlaylists();
+```
+
 ## Videos
 
 You can get all your videos or a single video.
