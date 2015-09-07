@@ -84,7 +84,13 @@ This will perform the most simple query, which would be `SHOW Video`. You can bu
 $Show = $Query->Show;
 ```
 
-**Adding condition***
+The default `SHOW` is for videos, but you can change it by calling the `Show()` method.
+
+```php
+$Show = $Query->Show("Audio");
+```
+
+**Adding condition**
 
 ```php
 $Show->Condition("title", "hello world");
