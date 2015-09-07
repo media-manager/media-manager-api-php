@@ -9,8 +9,15 @@ namespace MediaManager\Analytics;
  */
 class Query {
 
+    /**
+     * The Show object.
+     * @var Show;
+     */
     private $Show;
-
+    
+    /**
+     * 
+     */
     public function __construct() {
         //SET THE DEFAULT SHOW
         $this->Show = new Show("Video");
@@ -24,6 +31,17 @@ class Query {
     public function Show($show) {
         $this->Show = new Show($show);
         return $this->Show;
+    }
+
+    /**
+     * Getter
+     * @param type $name
+     * @return type
+     */
+    public function __get($name) {
+        if (property_exists($this, $name)) {
+            return $this->$name;
+        }
     }
 
     /**
