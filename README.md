@@ -60,6 +60,8 @@ $videos = $MediaManager->API->getVideo("{videoid}");
 
 Media Manager has a number of external APIs. These are mainly used for Javascript based calls, but can still be called via PHP using this library.
 
+### Templates
+
 **Searching videos**
 
 You can search all videos on a given external template. You can pass up to `25 terms` to search against (as an array). The search is purformed on `titles`, `descriptions` and `tags`.
@@ -112,6 +114,18 @@ Get all audios on template.
 
 ```php
 $audios = $MediaManager->ExternalAPI->getTemplateAudios("{external_template_id}");
+```
+
+###Playlists
+
+All these playlist APIS will require a `templateID` also. They allow you filter down videos that appear in a playlist and also a external template.
+
+**Get videos on playlist**
+
+Get all videos published to a playlist
+
+```php
+$audios = $MediaManager->ExternalAPI->getPlaylistVideosOnTemplate("{external_template_id}");
 ```
 
 
