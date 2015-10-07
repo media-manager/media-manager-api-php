@@ -38,13 +38,13 @@ class HTTP {
 
         //MERGE GLOBAL PARAMS INTO DATA PASSED.
         $data = array_merge($data, $this->globalParams);
-
+        
         //IF NOT SENDING FILE, THEN CONVERT PARAMS INTO QUERY STRING.
         $data = (!$sendingFile) ? http_build_query($data, '', '&') : $data;
 
         //IF TYPE A GET REQUEST.
         $url .= ($type != 'POST' && $type != 'PUT') ? '?' . $data : '';
-
+        
         //SETUP CURL REQUEST
         $ch = curl_init();
 
@@ -77,15 +77,15 @@ class HTTP {
         curl_close($ch);
 
         $json = json_decode($result, true);
-        
+
         //IF VALID JSON, THEN RETURN THAT
         if (!is_null($json)) {
-            
+
             //IF AN ERROR HAS HAPPEND
-            if(isset($json["error"])){
-               throw Exception($json["error"]["message"], $json["error"]["code"]);
+            if (isset($json["error"])) {
+                return array("error" => $json["error"]["message"]);
             }
-            
+
             return $json;
         }
 
