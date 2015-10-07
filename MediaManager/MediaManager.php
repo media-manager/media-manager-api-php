@@ -3,6 +3,7 @@
 namespace MediaManager;
 
 use \MediaManager\API\API as API;
+use \MediaManager\API\External as External;
 
 /**
  * Description of MediaManager
@@ -16,6 +17,12 @@ class MediaManager {
      * @var API 
      */
     public $API;
+    
+    /**
+     * The API Object
+     * @var API 
+     */
+    public $ExternalAPI;
 
     /**
      * Media Manager Object
@@ -24,6 +31,6 @@ class MediaManager {
      */
     public function __construct($client, $apiKey) {
         $this->API = new API($client, $apiKey);
+        $this->ExternalAPI = new External($client, $apiKey);
     }
-
 }
