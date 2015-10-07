@@ -70,7 +70,7 @@ $searchResults = $MediaManager->ExternalAPI->searchTemplateVideos("{external_tem
 
 **Most viewed videos**
 
-```
+```php
 $mostViewed = $MediaManager->ExternalAPI->getTemplateMostViewedVideos("{external_template_id}");
 ```
 
