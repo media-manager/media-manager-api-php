@@ -60,17 +60,22 @@ $videos = $MediaManager->API->getVideo("{videoid}");
 
 Media Manager has a number of external APIs. These are mainly used for Javascript based calls, but can still be called via PHP using this library.
 
-**Searching videos on template**
+**Searching videos **
 
 You can search all videos on a given external template. You can pass up to `25 terms` to search against (as an array). The search is purformed on `titles`, `descriptions` and `tags`.
 
 ```php
-$searchResults = $MediaManager->ExternalAPI->searchVideos("{external_template_id}", array("hello", "world"));
+$searchResults = $MediaManager->ExternalAPI->searchTemplateVideos("{external_template_id}", array("hello", "world"));
 ```
 
-**Note: Any request to an external API must come from the registered origin for the external template.**
+**Most viewed videos**
 
-**Note: Only external templates can be used. Otherwise the "Template is not an external template" error will be thrown.**
+```
+$mostViewed = $MediaManager->ExternalAPI->getTemplateMostViewedVideos("{external_template_id}");
+```
+
+`Note: Any request to an external API must come from the registered origin for the external template.`
+`Note: Only external templates can be used. Otherwise the "Template is not an external template" error will be thrown.`
 
 ## Analytics
 
