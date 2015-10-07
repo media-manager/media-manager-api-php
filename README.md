@@ -74,8 +74,10 @@ $searchResults = $MediaManager->ExternalAPI->searchTemplateVideos("{external_tem
 $mostViewed = $MediaManager->ExternalAPI->getTemplateMostViewedVideos("{external_template_id}");
 ```
 
-`Note: Any request to an external API must come from the registered origin for the external template.`
-`Note: Only external templates can be used. Otherwise the "Template is not an external template" error will be thrown.`
+```
+Note: Any request to an external API must come from the registered origin for the external template.
+Note: Only external templates can be used. Otherwise the "Template is not an external template" error will be thrown.
+```
 
 ## Analytics
 
