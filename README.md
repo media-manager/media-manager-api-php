@@ -120,18 +120,29 @@ $audios = $MediaManager->ExternalAPI->getTemplateAudios("{external_template_id}"
 
 All these playlist APIS will require a `templateID` also. They allow you filter down videos that appear in a playlist and also a external template.
 
-**Get videos on playlist**
+**Get videos in playlist**
 
 Get all videos published to a playlist
 
 ```php
-$audios = $MediaManager->ExternalAPI->getPlaylistVideosOnTemplate("{external_template_id}");
+$videos = $MediaManager->ExternalAPI->getPlaylistVideosOnTemplate("{playlist_id}","{external_template_id}");
 ```
 
+**Get audios in playlist**
 
+Get all audios published to a playlist
 
-**Note**: *Any request to an external API must come from the registered origin for the external template.*
-**Note**: *Only external templates can be used. Otherwise the "Template is not an external template" error will be thrown.*
+```php
+$audios = $MediaManager->ExternalAPI->getPlaylistAudiosOnTemplate("{playlist_id}","{external_template_id}");
+```
+
+**Get video in playlist**
+
+Get video published to a playlist
+
+```php
+$video = $MediaManager->ExternalAPI->getPlaylistVideoOnTemplate("{playlist_id}","{external_template_id}","{video_id"});
+```
 
 ## Analytics
 
