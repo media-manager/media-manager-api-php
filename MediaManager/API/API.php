@@ -17,7 +17,7 @@ class API {
      * The HTTP Object
      * @var HTTP 
      */
-    private $HTTP;
+    protected $HTTP;
 
     /**
      *
@@ -47,7 +47,7 @@ class API {
      * The Base URI for the API
      * @var type 
      */
-    private $BASE_URI = "{client}.dev.mediamanager.io/api/v{version}";
+    protected $BASE_URI = "{client}.dev.mediamanager.io/api/v{version}";
 
     /**
      * Filters to apply to API calls
@@ -93,7 +93,7 @@ class API {
      * @param type $filterValue
      */
     public function addFilter($filterName, $filterValue) {
-        $this->filters[$filterName] = $filterValue;
+        $this->HTTP->setGlobalParams(array($filterName => $filterValue));
     }
 
     /**
@@ -167,10 +167,7 @@ class API {
     public function getVideos() {
 
         $api = "/videos";
-
-        //ADD ANY FILTERS
-        $this->HTTP->setGlobalParams($this->filters);
-
+        
         //GET CLIENT DATA
         $response = $this->HTTP->Get($this->BASE_URI . $api);
 
