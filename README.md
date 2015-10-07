@@ -56,6 +56,13 @@ $videos = $MediaManager->API->getVideos();
 $videos = $MediaManager->API->getVideo("{videoid}");
 ```
 
+## External
+
+Media Manager has a number of external APIs. These are mainly used for Javascript based calls, but can still be called via PHP using this library.
+
+***Note: Any request to an external API must come from the registered origin for the external template.***
+***Note: Only external templates can be used. Otherwise the "Template is not an external template" error will be thrown.
+
 ## Analytics
 
 You can also query your analytics.
