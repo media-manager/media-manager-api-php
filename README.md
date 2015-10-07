@@ -74,10 +74,26 @@ $searchResults = $MediaManager->ExternalAPI->searchTemplateVideos("{external_tem
 $mostViewed = $MediaManager->ExternalAPI->getTemplateMostViewedVideos("{external_template_id}");
 ```
 
+**Recommend videos**
+
+You can use the recommend API to get recommendations based on a video you pass.
+
+```php
+$mostViewed = $MediaManager->ExternalAPI->recommendTemplateVideo("{external_template_id}","{videoid}");
+```
+
+**Latest videos**
+
+Get the latest videos on template
+
+```php
+$latest = $MediaManager->ExternalAPI->getTemplateLatestVideos("{external_template_id}");
+```
+
+
 
 **Note**: *Any request to an external API must come from the registered origin for the external template.*
 **Note**: *Only external templates can be used. Otherwise the "Template is not an external template" error will be thrown.*
-
 
 ## Analytics
 
