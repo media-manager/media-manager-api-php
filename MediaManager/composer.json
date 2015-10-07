@@ -1,0 +1,7 @@
+{
+    "name": "Media-Manager/Media-Manager-API-PHP",
+    "description": "A PHP Library for interacting with the Media Manager APIs.",
+    "require": {
+        "php": ">=5.3.0"
+    }
+}
