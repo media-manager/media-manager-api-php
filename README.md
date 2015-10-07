@@ -1,6 +1,6 @@
 # Media Manager API - PHP
 
-A PHP library for interacting with the Media Maanger APIs
+A PHP library for interacting with the Media Manager APIs
 
 ## Setting up
 
