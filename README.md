@@ -90,6 +90,30 @@ Get the latest videos on template
 $latest = $MediaManager->ExternalAPI->getTemplateLatestVideos("{external_template_id}");
 ```
 
+**Get video on template**
+
+Get a video details thats published to template.
+
+```php
+$video = $MediaManager->ExternalAPI->getTemplateVideo("{external_template_id}", "{videoid}");
+```
+
+**Get videos on template**
+
+Get all videos on template.
+
+```php
+$videos = $MediaManager->ExternalAPI->getTemplateVideos("{external_template_id}");
+```
+
+**Get audios on template**
+
+Get all audios on template.
+
+```php
+$audios = $MediaManager->ExternalAPI->getTemplateAudios("{external_template_id}");
+```
+
 
 
 **Note**: *Any request to an external API must come from the registered origin for the external template.*
