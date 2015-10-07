@@ -144,6 +144,14 @@ Get video published to a playlist
 $video = $MediaManager->ExternalAPI->getPlaylistVideoOnTemplate("{playlist_id}","{external_template_id}","{video_id"});
 ```
 
+**Get audio in playlist**
+
+Get audio published to a playlist
+
+```php
+$video = $MediaManager->ExternalAPI->getPlaylistAudioOnTemplate("{playlist_id}","{external_template_id}","{audio_id"});
+```
+
 ## Analytics
 
 You can also query your analytics.
