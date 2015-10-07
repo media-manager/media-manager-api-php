@@ -62,7 +62,7 @@ Media Manager has a number of external APIs. These are mainly used for Javascrip
 
 **Searching videos on template**
 
-You can search all videos on a given external template. You can pass up to 25 terms to search against. The search is purformed on titles, descriptions and tags.
+You can search all videos on a given external template. You can pass up to `25 terms` to search against (as an array). The search is purformed on `titles`, `descriptions` and `tags`.
 
 ```php
 $searchResults = $MediaManager->ExternalAPI->searchVideos("{external_template_id}", array("hello", "world"));
