@@ -47,7 +47,7 @@ class API {
      * The Base URI for the API
      * @var type 
      */
-    protected $BASE_URI = "{client}.dev.mediamanager.io/api/v{version}";
+    protected $BASE_URI = "{client}.getmediamanager.com/api/v{version}";
 
     /**
      * Filters to apply to API calls
