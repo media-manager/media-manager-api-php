@@ -102,7 +102,7 @@ class External extends API {
     public function getTemplateVideos($template) {
 
         $api = "/external/template/" . $template . "/videos";
-
+        
         //GET CLIENT DATA
         $response = $this->HTTP->Get($this->BASE_URI . $api);
 
@@ -198,6 +198,51 @@ class External extends API {
         $response = $this->HTTP->Get($this->BASE_URI . $api);
 
         return $response;
+    }
+
+    /**
+     * Generate the sitemap for template
+     * @param type $template
+     */
+    public function generateTemplateSitemap($template, $location = "") {
+
+        $this->HTTP->setGlobalParams(array("perPage" => 100));
+
+        //GET TEMPLATE VIDEOS
+        $videos = $this->getTemplateVideos($template);
+
+        //THE VIDEO URL XML.
+        $videoURLXML = file_get_contents("MediaManager/Templates/video-sitemap-url.xml");
+
+        //BUILD THE XML STRING.
+        $videoXML = "";
+        
+        foreach ($videos["data"] as $video) {
+            
+            //SET THE LOCATION
+            $video["location"] = "https://" . $this->client . ".getmediamanager.com/video/" . $video["_id"];
+            $video["playerlocation"] = $video["location"] . "?autoplay=false";
+            $video["filelocation"] = $video["videoFiles"]["http"]["mp4"]["360"];
+            
+            //SET THE URL ROW
+            $urlRow = $videoURLXML;
+
+            $keys = array_keys($video);
+
+            foreach ($keys as $key) {
+                if (is_string($video[$key]) || is_numeric($video[$key])) {
+                    $urlRow = str_replace("{" . $key . "}", htmlspecialchars($video[$key]), $urlRow);
+                }
+            }
+
+            $videoXML .= $urlRow;
+        }
+
+        $videoURLXML = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">';
+        $videoURLXML .= $videoXML;
+        $videoURLXML .= "</urlset>";
+
+        file_put_contents("{$location}sitemap.xml", $videoURLXML);
     }
 
 }
