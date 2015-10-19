@@ -50,6 +50,7 @@ class HTTP {
 
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_REFERER, $_SERVER["HTTP_HOST"]);
 
         //IF ANY HEADERS PASSED, THEN SET THEM.
         if ($headers) {
