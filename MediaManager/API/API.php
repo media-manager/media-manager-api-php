@@ -29,7 +29,7 @@ class API {
      * The Client Shortname
      * @var type 
      */
-    private $client;
+    protected $client;
 
     /**
      * The API Version.
@@ -47,7 +47,7 @@ class API {
      * The Base URI for the API
      * @var type 
      */
-    protected $BASE_URI = "{client}.getmediamanager.com/api/v{version}";
+    protected $BASE_URI = "https://{client}.getmediamanager.com/api/v{version}";
 
     /**
      * Filters to apply to API calls
