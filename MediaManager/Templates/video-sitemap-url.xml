@@ -1,0 +1,12 @@
+<url> 
+    <loc>{location}</loc>
+    <video:video>
+        <video:thumbnail_loc>{thumbnail}</video:thumbnail_loc> 
+        <video:title>{title}</video:title>
+        <video:description>{description}</video:description>
+        <video:content_loc>{filelocation}</video:content_loc>
+        <video:player_loc allow_embed="yes" autoplay="ap=1">{playerlocation}</video:player_loc>
+        <video:duration>{duration}</video:duration>
+        <video:publication_date>{publish_date}</video:publication_date>
+    </video:video> 
+</url> 
