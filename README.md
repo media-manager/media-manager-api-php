@@ -20,12 +20,13 @@ And then run the composer install
 composer install
 ```
 
+Now you can require the ``autoload``.
+
 ```php
-//AUTO LOAD
-include("MediaManager/autoload.php");
+require 'vendor/autoload.php';
 
 //CREATE MEDIAMANAGER INSTANCE
-$MediaManager = new \MediaManager\MediaManager("{shortname}", "{apikey}");
+$MediaManager = new \MediaManager\MediaManager("{shortname}", "{apiKey}");
 ```
 
 ## Client
