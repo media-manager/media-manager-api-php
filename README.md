@@ -2,7 +2,23 @@
 
 A PHP library for interacting with the Media Manager APIs
 
-## Setting up
+## Installing
+
+The library can be installed via Composer. Simply include the library in your require block in ``composer.json``.
+
+```javascript
+{
+    "require": {
+        "media-manager/media-manager-api-php": "dev-master"
+    }
+}
+```
+
+And then run the composer install
+
+```
+composer install
+```
 
 ```php
 //AUTO LOAD
