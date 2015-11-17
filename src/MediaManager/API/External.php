@@ -212,7 +212,7 @@ class External extends API {
         $videos = $this->getTemplateVideos($template);
 
         //THE VIDEO URL XML.
-        $videoURLXML = file_get_contents("MediaManager/Templates/video-sitemap-url.xml");
+        $videoURLXML = file_get_contents( __DIR__ . "/../Templates/video-sitemap-url.xml");
 
         //BUILD THE XML STRING.
         $videoXML = "";
@@ -220,6 +220,9 @@ class External extends API {
         foreach ($videos["data"] as $video) {
             
             //SET THE LOCATION
+			if (!isset($video["videoFiles"]["http"])) {
+				continue;
+			}
             $video["location"] = "https://" . $this->client . ".getmediamanager.com/video/" . $video["_id"];
             $video["playerlocation"] = $video["location"] . "?autoplay=false";
             $video["filelocation"] = $video["videoFiles"]["http"]["mp4"]["360"];
