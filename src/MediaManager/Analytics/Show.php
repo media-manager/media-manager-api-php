@@ -2,63 +2,65 @@
 
 namespace MediaManager\Analytics;
 
-use MediaManager\Analytics\Condition as Condition;
-
 /**
- * Description of Show
+ * Description of Show.
  *
  * @author Dale
  */
-class Show {
+class Show
+{
+    private $show = 'Video';
+    private $conditions = [];
 
-    private $show = "Video";
-    private $conditions = array();
-
-    public function __construct($show) {
+    public function __construct($show)
+    {
         $this->show = $show;
     }
 
-    public function Condition($key, $value, $operator = "IS") {
+    public function Condition($key, $value, $operator = 'IS')
+    {
         $condition = new Condition($key, $value, $operator);
         $this->conditions[] = $condition;
+
         return $condition;
     }
 
     /**
-     * Getter
+     * Getter.
+     *
      * @param type $name
+     *
      * @return type
      */
-    public function __get($name) {
+    public function __get($name)
+    {
         if (property_exists($this, $name)) {
             return $this->$name;
         }
     }
 
     /**
-     * The toString method
+     * The toString method.
      */
-    public function __toString() {
+    public function __toString()
+    {
 
         //THE QUERY
-        $query = "SHOW " . $this->show;
+        $query = 'SHOW '.$this->show;
 
         //IF HAS CONDITIONS
         if (!empty($this->conditions)) {
-            
-            $query .= " WHERE ";
-            
+            $query .= ' WHERE ';
+
             foreach ($this->conditions as $index => $condition) {
-                
                 $query .= $condition;
-                
-                if(isset($this->conditions[$index + 1])){
-                    $query .= " " . $condition->logical . " ";
+
+                if (isset($this->conditions[$index + 1])) {
+                    $query .= ' '.$condition->logical.' ';
                 }
             }
         }
 
         return $query;
     }
-
 }
