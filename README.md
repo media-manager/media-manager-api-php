@@ -1,6 +1,8 @@
 # Media Manager API - PHP
 
-A PHP library for interacting with the Media Manager APIs
+A PHP library for interacting with the Media Manager APIs.
+
+[![StyleCI](https://styleci.io/repos/41915718/shield)](https://styleci.io/repos/41915718)
 
 ## Installing
 
