@@ -3,12 +3,12 @@
 namespace MediaManager\Pager;
 
 /**
- * Description of Pager
+ * Description of Pager.
  *
  * @author Dale
  */
-class Pager implements \Iterator {
-
+class Pager implements \Iterator
+{
     private $total;
     private $per_page;
     private $current_page;
@@ -18,62 +18,73 @@ class Pager implements \Iterator {
     private $data;
     private $position = 0;
 
-    public function __construct(array $pageData) {
-        $this->total = $pageData["total"];
-        $this->per_page = $pageData["per_page"];
-        $this->current_page = $pageData["current_page"];
-        $this->last_page = $pageData["last_page"];
-        $this->from = $pageData["from"];
-        $this->to = $pageData["to"];
-        $this->data = $pageData["data"];
+    public function __construct(array $pageData)
+    {
+        $this->total = $pageData['total'];
+        $this->per_page = $pageData['per_page'];
+        $this->current_page = $pageData['current_page'];
+        $this->last_page = $pageData['last_page'];
+        $this->from = $pageData['from'];
+        $this->to = $pageData['to'];
+        $this->data = $pageData['data'];
     }
 
     /**
-     * Go back to start
+     * Go back to start.
      */
-    function rewind() {
+    public function rewind()
+    {
         $this->position = 0;
     }
 
     /**
-     * Get current item
+     * Get current item.
+     *
      * @return type
      */
-    function current() {
+    public function current()
+    {
         return $this->data[$this->position];
     }
 
     /**
-     * Get the key
+     * Get the key.
+     *
      * @return type
      */
-    function key() {
+    public function key()
+    {
         return $this->position;
     }
 
     /**
-     * Move to next position
+     * Move to next position.
      */
-    function next() {
+    public function next()
+    {
         ++$this->position;
     }
 
     /**
      * Check if item is valid based on position.
+     *
      * @return type
      */
-    function valid() {
+    public function valid()
+    {
         return isset($this->data[$this->position]);
     }
 
     /**
-     * Getter function
+     * Getter function.
+     *
      * @param type $property
+     *
      * @return type
      */
-    public function __get($property) {
-
-        if ($property == "items") {
+    public function __get($property)
+    {
+        if ($property == 'items') {
             return $this->data;
         }
 
@@ -81,5 +92,4 @@ class Pager implements \Iterator {
             return $this->$property;
         }
     }
-
 }

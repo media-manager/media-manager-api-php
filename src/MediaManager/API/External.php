@@ -3,230 +3,252 @@
 namespace MediaManager\API;
 
 /**
- * Description of External
+ * Description of External.
  *
  * @author Dale
  */
-class External extends API {
-
-    public function __construct($client, $apiKey, $version = 1) {
+class External extends API
+{
+    public function __construct($client, $apiKey, $version = 1)
+    {
         parent::__construct($client, $apiKey, $version);
     }
 
     /**
-     * Get most viewed videos on given template
+     * Get most viewed videos on given template.
+     *
      * @return type
      */
-    public function getTemplateMostViewedVideos($template) {
-
-        $api = "/external/template/" . $template . "/videos/mostviewed";
+    public function getTemplateMostViewedVideos($template)
+    {
+        $api = '/external/template/'.$template.'/videos/mostviewed';
 
         //GET CLIENT DATA
-        $response = $this->HTTP->Get($this->BASE_URI . $api);
+        $response = $this->HTTP->Get($this->BASE_URI.$api);
 
         return $response;
     }
 
     /**
-     * Get most viewed videos on given template
+     * Get most viewed videos on given template.
+     *
      * @return type
      */
-    public function recommendTemplateVideo($template, $videoid) {
-
-        $api = "/external/template/" . $template . "/videos/recommend/{$videoid}";
+    public function recommendTemplateVideo($template, $videoid)
+    {
+        $api = '/external/template/'.$template."/videos/recommend/{$videoid}";
 
         //GET CLIENT DATA
-        $response = $this->HTTP->Get($this->BASE_URI . $api);
+        $response = $this->HTTP->Get($this->BASE_URI.$api);
 
         return $response;
     }
 
     /**
-     * Get the latest videos on template
+     * Get the latest videos on template.
+     *
      * @param type $template
+     *
      * @return type
      */
-    public function getTemplateLatestVideos($template) {
-
-        $api = "/external/template/" . $template . "/videos/latest";
+    public function getTemplateLatestVideos($template)
+    {
+        $api = '/external/template/'.$template.'/videos/latest';
 
         //GET CLIENT DATA
-        $response = $this->HTTP->Get($this->BASE_URI . $api);
+        $response = $this->HTTP->Get($this->BASE_URI.$api);
 
         return $response;
     }
 
     /**
-     * Get the latest videos on template
+     * Get the latest videos on template.
+     *
      * @param type $template
+     *
      * @return type
      */
-    public function searchTemplateVideos($template, array $term) {
+    public function searchTemplateVideos($template, array $term)
+    {
 
         //IF NO TERMS FOUND
         if (count($term) == 0) {
-            throw new Exception("No terms passed");
+            throw new Exception('No terms passed');
         }
 
         //SET THE TERM PARAM
-        $this->HTTP->setGlobalParams(array("term" => implode(",", $term)));
+        $this->HTTP->setGlobalParams(['term' => implode(',', $term)]);
 
-        $api = "/external/template/" . $template . "/video/search";
+        $api = '/external/template/'.$template.'/video/search';
 
         //GET CLIENT DATA
-        $response = $this->HTTP->Get($this->BASE_URI . $api);
+        $response = $this->HTTP->Get($this->BASE_URI.$api);
 
         return $response;
     }
 
     /**
-     * Get details of video on template
+     * Get details of video on template.
+     *
      * @param type $template
      * @param type $videoid
      */
-    public function getTemplateVideo($template, $videoid) {
-
-        $api = "/external/template/" . $template . "/video/{$videoid}";
+    public function getTemplateVideo($template, $videoid)
+    {
+        $api = '/external/template/'.$template."/video/{$videoid}";
 
         //GET CLIENT DATA
-        $response = $this->HTTP->Get($this->BASE_URI . $api);
+        $response = $this->HTTP->Get($this->BASE_URI.$api);
 
         return $response;
     }
 
     /**
-     * Get all videos published to the external template
+     * Get all videos published to the external template.
+     *
      * @param type $template
+     *
      * @return type
      */
-    public function getTemplateVideos($template) {
+    public function getTemplateVideos($template)
+    {
+        $api = '/external/template/'.$template.'/videos';
 
-        $api = "/external/template/" . $template . "/videos";
-        
         //GET CLIENT DATA
-        $response = $this->HTTP->Get($this->BASE_URI . $api);
+        $response = $this->HTTP->Get($this->BASE_URI.$api);
 
         return $response;
     }
 
     /**
-     * Get all audios published to external template
+     * Get all audios published to external template.
+     *
      * @param type $template
+     *
      * @return type
      */
-    public function getTemplateAudios($template) {
-
-        $api = "/external/template/" . $template . "/audios";
+    public function getTemplateAudios($template)
+    {
+        $api = '/external/template/'.$template.'/audios';
 
         //GET CLIENT DATA
-        $response = $this->HTTP->Get($this->BASE_URI . $api);
+        $response = $this->HTTP->Get($this->BASE_URI.$api);
 
         return $response;
     }
 
     /**
      * Get all videos that are published to a given playlist on a given template.
+     *
      * @param type $playlist
      * @param type $template
+     *
      * @return type
      */
-    public function getPlaylistVideosOnTemplate($playlist, $template) {
-
+    public function getPlaylistVideosOnTemplate($playlist, $template)
+    {
         $api = "/external/playlist/{$playlist}/videos";
 
         //SET THE TEMPLATE ID
-        $this->HTTP->setGlobalParams(array("templateID" => $template));
+        $this->HTTP->setGlobalParams(['templateID' => $template]);
 
         //GET CLIENT DATA
-        $response = $this->HTTP->Get($this->BASE_URI . $api);
+        $response = $this->HTTP->Get($this->BASE_URI.$api);
 
         return $response;
     }
 
     /**
      * Get all videos that are published to a given playlist on a given template.
+     *
      * @param type $playlist
      * @param type $template
+     *
      * @return type
      */
-    public function getPlaylistAudiosOnTemplate($playlist, $template) {
-
+    public function getPlaylistAudiosOnTemplate($playlist, $template)
+    {
         $api = "/external/playlist/{$playlist}/audios";
 
         //SET THE TEMPLATE ID
-        $this->HTTP->setGlobalParams(array("templateID" => $template));
+        $this->HTTP->setGlobalParams(['templateID' => $template]);
 
         //GET CLIENT DATA
-        $response = $this->HTTP->Get($this->BASE_URI . $api);
+        $response = $this->HTTP->Get($this->BASE_URI.$api);
 
         return $response;
     }
 
     /**
      * Get all videos that are published to a given playlist on a given template.
+     *
      * @param type $playlist
      * @param type $template
+     *
      * @return type
      */
-    public function getPlaylistVideoOnTemplate($playlist, $template, $videoid) {
-
+    public function getPlaylistVideoOnTemplate($playlist, $template, $videoid)
+    {
         $api = "/external/playlist/{$playlist}/video/{$videoid}";
 
         //SET THE TEMPLATE ID
-        $this->HTTP->setGlobalParams(array("templateID" => $template));
+        $this->HTTP->setGlobalParams(['templateID' => $template]);
 
         //GET CLIENT DATA
-        $response = $this->HTTP->Get($this->BASE_URI . $api);
+        $response = $this->HTTP->Get($this->BASE_URI.$api);
 
         return $response;
     }
 
     /**
      * Get all videos that are published to a given playlist on a given template.
+     *
      * @param type $playlist
      * @param type $template
+     *
      * @return type
      */
-    public function getPlaylistAudioOnTemplate($playlist, $template, $audioid) {
-
+    public function getPlaylistAudioOnTemplate($playlist, $template, $audioid)
+    {
         $api = "/external/playlist/{$playlist}/video/{$audioid}";
 
         //SET THE TEMPLATE ID
-        $this->HTTP->setGlobalParams(array("templateID" => $template));
+        $this->HTTP->setGlobalParams(['templateID' => $template]);
 
         //GET CLIENT DATA
-        $response = $this->HTTP->Get($this->BASE_URI . $api);
+        $response = $this->HTTP->Get($this->BASE_URI.$api);
 
         return $response;
     }
 
     /**
-     * Generate the sitemap for template
+     * Generate the sitemap for template.
+     *
      * @param type $template
      */
-    public function generateTemplateSitemap($template, $location = "") {
-
-        $this->HTTP->setGlobalParams(array("perPage" => 100));
+    public function generateTemplateSitemap($template, $location = '')
+    {
+        $this->HTTP->setGlobalParams(['perPage' => 100]);
 
         //GET TEMPLATE VIDEOS
         $videos = $this->getTemplateVideos($template);
 
         //THE VIDEO URL XML.
-        $videoURLXML = file_get_contents( __DIR__ . "/../Templates/video-sitemap-url.xml");
+        $videoURLXML = file_get_contents(__DIR__.'/../Templates/video-sitemap-url.xml');
 
         //BUILD THE XML STRING.
-        $videoXML = "";
-        
-        foreach ($videos["data"] as $video) {
-            
+        $videoXML = '';
+
+        foreach ($videos['data'] as $video) {
+
             //SET THE LOCATION
-			if (!isset($video["videoFiles"]["http"])) {
-				continue;
-			}
-            $video["location"] = "https://" . $this->client . ".getmediamanager.com/video/" . $video["_id"];
-            $video["playerlocation"] = $video["location"] . "?autoplay=false";
-            $video["filelocation"] = $video["videoFiles"]["http"]["mp4"]["360"];
-            
+            if (!isset($video['videoFiles']['http'])) {
+                continue;
+            }
+            $video['location'] = 'https://'.$this->client.'.getmediamanager.com/video/'.$video['_id'];
+            $video['playerlocation'] = $video['location'].'?autoplay=false';
+            $video['filelocation'] = $video['videoFiles']['http']['mp4']['360'];
+
             //SET THE URL ROW
             $urlRow = $videoURLXML;
 
@@ -234,7 +256,7 @@ class External extends API {
 
             foreach ($keys as $key) {
                 if (is_string($video[$key]) || is_numeric($video[$key])) {
-                    $urlRow = str_replace("{" . $key . "}", htmlspecialchars($video[$key]), $urlRow);
+                    $urlRow = str_replace('{'.$key.'}', htmlspecialchars($video[$key]), $urlRow);
                 }
             }
 
@@ -243,9 +265,8 @@ class External extends API {
 
         $videoURLXML = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">';
         $videoURLXML .= $videoXML;
-        $videoURLXML .= "</urlset>";
+        $videoURLXML .= '</urlset>';
 
         file_put_contents("{$location}sitemap.xml", $videoURLXML);
     }
-
 }
