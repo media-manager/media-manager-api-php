@@ -1,6 +1,10 @@
 # Media Manager API - PHP
 
-A PHP library for interacting with the Media Manager APIs
+A PHP library for interacting with the Media Manager APIs.
+
+[![StyleCI](https://styleci.io/repos/41915718/shield)](https://styleci.io/repos/41915718)
+[![Coverage Status](https://coveralls.io/repos/github/media-manager/media-manager-api-php/badge.svg?branch=master)](https://coveralls.io/github/media-manager/media-manager-api-php?branch=master)
+[![Build Status](https://travis-ci.org/media-manager/media-manager-api-php.svg?branch=master)](https://travis-ci.org/media-manager/media-manager-api-php)
 
 ## Installing
 
