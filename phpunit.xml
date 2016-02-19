@@ -15,4 +15,5 @@
         <testsuite name="all">
             <directory>tests/</directory>
         </testsuite>
+    </testsuites>
 </phpunit>
