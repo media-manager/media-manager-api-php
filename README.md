@@ -5,6 +5,8 @@ A PHP library for interacting with the Media Manager APIs.
 [![StyleCI](https://styleci.io/repos/41915718/shield)](https://styleci.io/repos/41915718)
 [![Coverage Status](https://coveralls.io/repos/github/media-manager/media-manager-api-php/badge.svg?branch=master)](https://coveralls.io/github/media-manager/media-manager-api-php?branch=master)
 [![Build Status](https://travis-ci.org/media-manager/media-manager-api-php.svg?branch=master)](https://travis-ci.org/media-manager/media-manager-api-php)
+[![Latest Stable Version](https://poser.pugx.org/phpunit/phpunit/version)](https://packagist.org/packages/phpunit/phpunit)
+[![Total Downloads](https://poser.pugx.org/phpunit/phpunit/downloads)](https://packagist.org/packages/phpunit/phpunit)
 
 ## Installing
 
