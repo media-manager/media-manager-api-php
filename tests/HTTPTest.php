@@ -1,12 +1,12 @@
 <?php
+
 use MediaManager\HTTP\HTTP as HTTP;
 
 /**
- * External API Tests
+ * External API Tests.
  */
 class HTTPTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * Test setting of global parameters.
      */
@@ -16,11 +16,11 @@ class HTTPTest extends PHPUnit_Framework_TestCase
         $HTTPObject = new HTTP();
 
         //Expected results
-        $expected = array("foo" => "bar");
+        $expected = ['foo' => 'bar'];
 
         //Set the global params
         $HTTPObject->setGlobalParams($expected);
-        
+
         //Assert the setting of global params is correct.
         $this->assertEquals($expected, $HTTPObject->getGlobalParams());
     }

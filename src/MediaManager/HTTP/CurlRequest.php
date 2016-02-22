@@ -8,7 +8,6 @@ namespace MediaManager\HTTP;
  */
 class CurlRequest
 {
-
     private $url;
     private $data = [];
     private $type = 'GET';
@@ -18,9 +17,10 @@ class CurlRequest
 
     /**
      * Create a new CurlRequest object.
+     *
      * @param type $url
      */
-    public function __construct($url, $type = "GET")
+    public function __construct($url, $type = 'GET')
     {
         $this->url = $url;
         $this->type = $type;
@@ -28,6 +28,7 @@ class CurlRequest
 
     /**
      * Get the request URL.
+     *
      * @return string
      */
     public function getURL()
@@ -37,6 +38,7 @@ class CurlRequest
 
     /**
      * Set CurlRequest data that is passed along.
+     *
      * @param array $data
      */
     public function setData(array $data)
@@ -46,7 +48,8 @@ class CurlRequest
 
     /**
      * Is a file being sent with the request.
-     * @return boolean
+     *
+     * @return bool
      */
     public function isSendingFile()
     {
@@ -55,6 +58,7 @@ class CurlRequest
 
     /**
      * Get request data (the request parameters).
+     *
      * @return array
      */
     public function getData()
@@ -64,7 +68,8 @@ class CurlRequest
 
     /**
      * If request has headers to be sent.
-     * @return boolean TRUE|FALSE
+     *
+     * @return bool TRUE|FALSE
      */
     public function hasHeaders()
     {
@@ -73,6 +78,7 @@ class CurlRequest
 
     /**
      * Get request headers to be sent.
+     *
      * @return type
      */
     public function getHeaders()
@@ -82,6 +88,7 @@ class CurlRequest
 
     /**
      * Get the request type (GET,POST,DELETE,PUT,ect).
+     *
      * @return string
      */
     public function getType()
@@ -91,15 +98,17 @@ class CurlRequest
 
     /**
      * If auth creds should be sent with request (HTTP Basic Auth).
-     * @return boolean
+     *
+     * @return bool
      */
     public function shouldAuth()
     {
-        return ($this->auth !== false);
+        return $this->auth !== false;
     }
 
     /**
      * Get the basic auth credentials.
+     *
      * @return BasicAuth
      */
     public function getBasicAuth()
