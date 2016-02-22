@@ -189,7 +189,7 @@ class API
 
         //GET CLIENT DATA
         $response = $this->HTTP->Get($this->BASE_URI.$api);
-
+        
         return new Pager($response);
     }
 }

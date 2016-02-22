@@ -9,6 +9,7 @@ namespace MediaManager\HTTP;
  */
 class HTTP
 {
+
     /**
      * The Global Params.
      *
@@ -24,7 +25,25 @@ class HTTP
      */
     public function Get($url, array $params = [])
     {
-        return $this->Request($url, $params, 'GET');
+        //New CurlRequest
+        $CurlRequest = new CurlRequest($url);
+
+        //Set the request data.
+        $CurlRequest->setData($params);
+
+        //Do the request.
+        $response = $this->Request($CurlRequest);
+
+        return $response->toArray();
+    }
+
+    /**
+     * Get the HTTP Host.
+     * @return string
+     */
+    public function getHost()
+    {
+        return $_SERVER["HTTP_HOST"];
     }
 
     /**
@@ -37,66 +56,62 @@ class HTTP
      * @param type  $headers
      * @param array $auth
      *
-     * @return type
+     * @return JsonResponse
      */
-    public function Request($url, $data = [], $type = 'POST', $sendingFile = false, $headers = false, $auth = false)
+    public function Request(CurlRequest $request)
     {
-
         //MERGE GLOBAL PARAMS INTO DATA PASSED.
-        $data = array_merge($data, $this->globalParams);
+        $data = array_merge($request->getData(), $this->globalParams);
 
         //IF NOT SENDING FILE, THEN CONVERT PARAMS INTO QUERY STRING.
-        $data = (!$sendingFile) ? http_build_query($data, '', '&') : $data;
+        $data = (!$request->isSendingFile()) ? http_build_query($data, '', '&') : $data;
 
         //IF TYPE A GET REQUEST.
-        $url .= ($type != 'POST' && $type != 'PUT') ? '?'.$data : '';
+        $url = $request->getURL();
+        $url .= ($request->getType() != 'POST' && $request->getType() != 'PUT') ? '?' . $data : '';
 
         //SETUP CURL REQUEST
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_REFERER, $_SERVER['HTTP_HOST']);
+        curl_setopt($ch, CURLOPT_REFERER, $this->getHost());
 
         //IF ANY HEADERS PASSED, THEN SET THEM.
-        if ($headers) {
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        if ($request->hasHeaders()) {
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $request->getHeaders());
         }
 
         //IF SENDING AUTH
-        if ($auth) {
-            curl_setopt($ch, CURLOPT_USERPWD, "{$auth['username']}:{$auth['password']}");
+        if ($request->shouldAuth()) {
+
+            //Get the basic auth crentials.
+            $basicAuth = $request->getBasicAuth();
+
+            curl_setopt($ch, CURLOPT_USERPWD, $basicAuth->getUsername() . ":" . $basicAuth->getPassword());
         }
 
         //IF POST TYPE
-        if ($type == 'POST') {
+        if ($request->getType() == 'POST') {
             curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        } elseif ($type == 'PUT') {
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $type);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $request->getData());
+        } elseif ($request->getType() == 'PUT') {
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $request->getType());
             curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $request->getData());
         } else {
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $type);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $request->getType());
         }
 
         $result = curl_exec($ch);
+        
+        //Close curl
         curl_close($ch);
 
-        $json = json_decode($result, true);
+        //The JSON response.
+        $Response = new JsonResponse($result);
 
-        //IF VALID JSON, THEN RETURN THAT
-        if (!is_null($json)) {
-
-            //IF AN ERROR HAS HAPPEND
-            if (isset($json['error'])) {
-                return ['error' => $json['error']['message']];
-            }
-
-            return $json;
-        }
-
-        return $result;
+        return $Response;
     }
 
     /**
@@ -107,5 +122,14 @@ class HTTP
     public function setGlobalParams(array $params)
     {
         $this->globalParams = array_merge($params, $this->globalParams);
+    }
+
+    /**
+     * Get Global params.
+     * @return type
+     */
+    public function getGlobalParams()
+    {
+        return $this->globalParams;
     }
 }
