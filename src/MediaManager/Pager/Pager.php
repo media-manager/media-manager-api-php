@@ -9,6 +9,7 @@ namespace MediaManager\Pager;
  */
 class Pager implements \Iterator
 {
+
     private $total;
     private $per_page;
     private $current_page;
@@ -19,7 +20,11 @@ class Pager implements \Iterator
     private $position = 0;
 
     public function __construct(array $pageData)
-    {
+    {   
+        if (isset($pageData["total"])) {
+            throw Exception("Invalid pager data", 400);
+        }
+
         $this->total = $pageData['total'];
         $this->per_page = $pageData['per_page'];
         $this->current_page = $pageData['current_page'];
