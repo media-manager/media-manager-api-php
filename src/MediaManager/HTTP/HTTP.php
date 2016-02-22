@@ -9,7 +9,6 @@ namespace MediaManager\HTTP;
  */
 class HTTP
 {
-
     /**
      * The Global Params.
      *
@@ -39,11 +38,12 @@ class HTTP
 
     /**
      * Get the HTTP Host.
+     *
      * @return string
      */
     public function getHost()
     {
-        return $_SERVER["HTTP_HOST"];
+        return $_SERVER['HTTP_HOST'];
     }
 
     /**
@@ -68,7 +68,7 @@ class HTTP
 
         //IF TYPE A GET REQUEST.
         $url = $request->getURL();
-        $url .= ($request->getType() != 'POST' && $request->getType() != 'PUT') ? '?' . $data : '';
+        $url .= ($request->getType() != 'POST' && $request->getType() != 'PUT') ? '?'.$data : '';
 
         //SETUP CURL REQUEST
         $ch = curl_init();
@@ -88,7 +88,7 @@ class HTTP
             //Get the basic auth crentials.
             $basicAuth = $request->getBasicAuth();
 
-            curl_setopt($ch, CURLOPT_USERPWD, $basicAuth->getUsername() . ":" . $basicAuth->getPassword());
+            curl_setopt($ch, CURLOPT_USERPWD, $basicAuth->getUsername().':'.$basicAuth->getPassword());
         }
 
         //IF POST TYPE
@@ -104,7 +104,7 @@ class HTTP
         }
 
         $result = curl_exec($ch);
-        
+
         //Close curl
         curl_close($ch);
 
@@ -126,6 +126,7 @@ class HTTP
 
     /**
      * Get Global params.
+     *
      * @return type
      */
     public function getGlobalParams()

@@ -6,11 +6,10 @@ use MediaManager\Exception\InvalidJSONException as InvalidJSONException;
 
 class JsonResponse
 {
-
-    private $jsonString = "";
-    private $jsonArray = array();
+    private $jsonString = '';
+    private $jsonArray = [];
     private $hasErrors = false;
-    private $errorMessage = "";
+    private $errorMessage = '';
 
     public function __construct($jsonString)
     {
@@ -24,6 +23,7 @@ class JsonResponse
     /**
      * Parse JSON string into a assoc array. An Exception will be thrown
      * if JSON string is not valid JSON.
+     *
      * @throws Exception
      */
     private function parseJSON()
@@ -35,19 +35,20 @@ class JsonResponse
         $this->jsonArray = $parsed;
 
         //If json has an error key.
-        if (isset($parsed["error"])) {
+        if (isset($parsed['error'])) {
             $this->hasErrors = true;
-            $this->errorMessage = $parsed["error"]["message"];
+            $this->errorMessage = $parsed['error']['message'];
         }
 
         //If JSON does not parse correctly, then throw exception. q
         if (is_null($this->jsonArray)) {
-            throw new InvalidJSONException("Invalid JSON String", 400);
+            throw new InvalidJSONException('Invalid JSON String', 400);
         }
     }
 
     /**
      * JSONReponse to string. Simply returns original string.
+     *
      * @return string
      */
     public function toString()
@@ -57,6 +58,7 @@ class JsonResponse
 
     /**
      * Get the error message from a json response (if any).
+     *
      * @return string
      */
     public function getErrorMessage()
@@ -66,6 +68,7 @@ class JsonResponse
 
     /**
      * CHeck if JSON has error message within it.
+     *
      * @return type
      */
     public function hasErrors()
@@ -75,6 +78,7 @@ class JsonResponse
 
     /**
      * Return JSON as an assoc array.
+     *
      * @return array
      */
     public function toArray()
