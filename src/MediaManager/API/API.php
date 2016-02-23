@@ -22,11 +22,6 @@ class API
     protected $HTTP;
 
     /**
-     * @var Analytics
-     */
-    private $Analytics;
-
-    /**
      * The Client Shortname.
      *
      * @var type
@@ -61,13 +56,6 @@ class API
     protected $BASE_URI = 'https://{client}.getmediamanager.com/api/v{version}';
 
     /**
-     * Filters to apply to API calls.
-     *
-     * @var type
-     */
-    private $filters = [];
-
-    /**
      * A API Object.
      *
      * @param type $client
@@ -89,21 +77,17 @@ class API
         //ATTACH THE HTTP OBJECT
         $this->HTTP = new HTTP($this->request);
 
-        //SET THE API KEY TO BE PASSED TO ALL REQUESTS.
+        //Set the API key as a global param.
         $this->HTTP->setGlobalParams(['_apikey' => $apiKey]);
-
-        //THE ANALYTICS BUILDER
-        $this->Analytics = new Analytics($this->BASE_URI, $this->HTTP);
     }
 
     /**
-     * Get the Analytics object.
-     *
-     * @return type
+     * Get the Analyics object
+     * @return Analytics
      */
     public function Analytics()
     {
-        return $this->Analytics;
+        return new Analytics($this->HTTP);
     }
 
     /**
