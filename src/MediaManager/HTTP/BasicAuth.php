@@ -42,4 +42,22 @@ class BasicAuth
     {
         return $this->password;
     }
+
+    /**
+     * Set the basic auth username.
+     * @param string $username
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
+    /**
+     * Set the password for basic auth.
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
 }
