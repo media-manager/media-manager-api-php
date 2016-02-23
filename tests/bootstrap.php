@@ -6,9 +6,6 @@ error_reporting(E_ALL);
 // Time zone
 date_default_timezone_set('UTC');
 
-// Autoloader
-require_once dirname(__FILE__).'/../vendor/autoload.php';
-
 /*
  * Autoload classes that are required for testing when called.
  */
