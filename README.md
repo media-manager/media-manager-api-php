@@ -177,21 +177,6 @@ $video = $MediaManager->ExternalAPI->getPlaylistAudioOnTemplate("{playlist_id}",
 
 You can also query your analytics.
 
-```php
-//QUERY ANALYTICS
-$query = $MediaManager->API->Analytics()->Query("{query}", "{from}", "{to}");
-```
-
-**Dates**
-
-Dates can be in pretty much any format as long as they are a valid date.
-
-```
-2015-09-01
-1st Jan 2015
-etc..
-```
-
 **Query Builder**
 
 You can also make use of the Query Builder.
