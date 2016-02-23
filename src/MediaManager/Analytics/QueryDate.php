@@ -63,6 +63,15 @@ class QueryDate
     }
 
     /**
+     * substract days from dat.e
+     * @param int $noOfDays
+     */
+    public function subDays($noOfDays)
+    {
+        $this->sub("P" . $noOfDays . "D");
+    }
+
+    /**
      * Add to a DateTime using the DateInterval. Simply pass the string.
      * e.g P20D for 20 Days.
      * @param string $intervalString
@@ -70,5 +79,14 @@ class QueryDate
     public function add($intervalString)
     {
         $this->date->add(new \DateInterval($intervalString));
+    }
+
+    /**
+     * Substract from a DateTime using the DateInterval.
+     * @param string $intervalString
+     */
+    public function sub($intervalString)
+    {
+        $this->date->sub(new \DateInterval($intervalString));
     }
 }
