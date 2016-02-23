@@ -27,7 +27,7 @@ class HTTP
      * Create new HTTP request.
      * @param \MediaManager\HTTP\CurlRequest $request
      */
-    public function __construct(CurlRequest $request)
+    public function __construct(\MediaManager\HTTP\CurlRequest $request)
     {
         $this->request = $request;
     }
@@ -46,27 +46,29 @@ class HTTP
         //Do the request.
         $response = $this->Request();
 
+        //Return resutls as an array.
         return $response->toArray();
     }
 
     /**
-     * Send a HTTP request.
-     *
-     * @param type  $url
-     * @param type  $data
-     * @param type  $type
-     * @param type  $sendingFile
-     * @param type  $headers
-     * @param array $auth
-     *
-     * @return JsonResponse
+     * Get the HTTP request object.
+     * @return \MediaManager\HTTP\CurlRequest 
+     */
+    public function getRequest()
+    {
+        return $this->request;
+    }
+
+    /**
+     * Make the HTTP request.
+     * @return \MediaManager\HTTP\JsonResponse
      */
     public function Request()
     {
 
         //Merge the global params with the request params.
         $data = array_merge($this->request->getData(), $this->globalParams);
-        
+
         //Update the request params with the new combined params.
         $this->request->setData($data);
 
