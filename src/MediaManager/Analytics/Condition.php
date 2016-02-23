@@ -9,6 +9,7 @@ namespace MediaManager\Analytics;
  */
 class Condition
 {
+
     private $logical = 'AND';
     private $key, $value, $operator;
 
@@ -36,20 +37,61 @@ class Condition
      */
     public function __toString()
     {
-        return '{'.$this->key.' '.$this->operator.' '.$this->value.'}';
+        return '{' . $this->key . ' ' . $this->operator . ' ' . $this->value . '}';
     }
 
     /**
-     * Getter.
-     *
-     * @param type $name
-     *
+     * Get the key of condition.
+     * @return string
+     */
+    public function getKey()
+    {
+        return $this->key;
+    }
+
+    /**
+     * Get the key of condition.
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * Get the condition operator (e.g IS, ISNOT).
      * @return type
      */
-    public function __get($name)
+    public function getOperator()
     {
-        if (property_exists($this, $name)) {
-            return $this->$name;
-        }
+        return $this->operator;
+    }
+
+    /**
+     * Get the logical operator, which is used to seperate conditions.
+     * (e.g AND, OR).
+     * @return type
+     */
+    public function getLogical()
+    {
+        return $this->logical;
+    }
+
+    /**
+     * Set the operator
+     * @param type $operator
+     */
+    public function setOperator($operator)
+    {
+        $this->operator = $operator;
+    }
+
+    /**
+     * Set the key
+     * @param type $key
+     */
+    public function setKey($key)
+    {
+        $this->key = $key;
     }
 }
