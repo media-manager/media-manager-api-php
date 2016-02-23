@@ -22,10 +22,10 @@ class External extends API
     public function getTemplateMostViewedVideos($template)
     {
         $api = '/external/template/'.$template.'/videos/mostviewed';
-        
+
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
-        
+        $this->request->setURL($this->BASE_URI.$api);
+
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
 
@@ -40,10 +40,10 @@ class External extends API
     public function recommendTemplateVideo($template, $videoid)
     {
         $api = '/external/template/'.$template."/videos/recommend/{$videoid}";
-        
+
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
-        
+        $this->request->setURL($this->BASE_URI.$api);
+
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
 
@@ -60,10 +60,10 @@ class External extends API
     public function getTemplateLatestVideos($template)
     {
         $api = '/external/template/'.$template.'/videos/latest';
-        
+
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
-        
+        $this->request->setURL($this->BASE_URI.$api);
+
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
 
@@ -89,10 +89,10 @@ class External extends API
         $this->HTTP->setGlobalParams(['term' => implode(',', $term)]);
 
         $api = '/external/template/'.$template.'/video/search';
-        
+
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
-        
+        $this->request->setURL($this->BASE_URI.$api);
+
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
 
@@ -108,10 +108,10 @@ class External extends API
     public function getTemplateVideo($template, $videoid)
     {
         $api = '/external/template/'.$template."/video/{$videoid}";
-        
+
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
-        
+        $this->request->setURL($this->BASE_URI.$api);
+
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
 
@@ -128,10 +128,10 @@ class External extends API
     public function getTemplateVideos($template)
     {
         $api = '/external/template/'.$template.'/videos';
-        
+
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
-        
+        $this->request->setURL($this->BASE_URI.$api);
+
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
 
@@ -148,10 +148,10 @@ class External extends API
     public function getTemplateAudios($template)
     {
         $api = '/external/template/'.$template.'/audios';
-        
+
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
-        
+        $this->request->setURL($this->BASE_URI.$api);
+
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
 
@@ -172,10 +172,10 @@ class External extends API
 
         //SET THE TEMPLATE ID
         $this->HTTP->setGlobalParams(['templateID' => $template]);
-        
+
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
-        
+        $this->request->setURL($this->BASE_URI.$api);
+
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
 
@@ -198,8 +198,8 @@ class External extends API
         $this->HTTP->setGlobalParams(['templateID' => $template]);
 
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
-        
+        $this->request->setURL($this->BASE_URI.$api);
+
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
 
@@ -220,10 +220,10 @@ class External extends API
 
         //SET THE TEMPLATE ID
         $this->HTTP->setGlobalParams(['templateID' => $template]);
-        
+
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
-        
+        $this->request->setURL($this->BASE_URI.$api);
+
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
 
@@ -244,10 +244,10 @@ class External extends API
 
         //SET THE TEMPLATE ID
         $this->HTTP->setGlobalParams(['templateID' => $template]);
-        
+
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
-        
+        $this->request->setURL($this->BASE_URI.$api);
+
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
 

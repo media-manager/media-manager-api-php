@@ -1,25 +1,24 @@
 <?php
+
 use MediaManager\HTTP\HTTP as HTTP;
 
 /**
- * External API Tests
+ * External API Tests.
  */
 class HTTPTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * Test setting of global parameters.
      */
     public function testSetGlobalParams()
     {
-
-        $CurlRequest = new MediaManager\HTTP\CurlRequest("http://www.example.com");
+        $CurlRequest = new MediaManager\HTTP\CurlRequest('http://www.example.com');
 
         //Create HTTP Object
         $HTTPObject = new HTTP($CurlRequest);
 
         //Expected results
-        $expected = array("foo" => "bar");
+        $expected = ['foo' => 'bar'];
 
         //Set the global params
         $HTTPObject->setGlobalParams($expected);
@@ -34,54 +33,54 @@ class HTTPTest extends PHPUnit_Framework_TestCase
     public function testBasicAuthObject()
     {
         //The BasicAuth object
-        $BasicAuth = new \MediaManager\HTTP\BasicAuth("foo", "bar");
+        $BasicAuth = new \MediaManager\HTTP\BasicAuth('foo', 'bar');
 
         //Assert username and password are correct.
-        $this->assertEquals($BasicAuth->getUsername(), "foo");
-        $this->assertEquals($BasicAuth->getPassword(), "bar");
+        $this->assertEquals($BasicAuth->getUsername(), 'foo');
+        $this->assertEquals($BasicAuth->getPassword(), 'bar');
 
         //Set the username and password
-        $BasicAuth->setUsername("bar");
-        $BasicAuth->setPassword("foo");
+        $BasicAuth->setUsername('bar');
+        $BasicAuth->setPassword('foo');
 
         //Assert they are true.
-        $this->assertEquals("bar", $BasicAuth->getUsername());
-        $this->assertEquals("foo", $BasicAuth->getPassword());
+        $this->assertEquals('bar', $BasicAuth->getUsername());
+        $this->assertEquals('foo', $BasicAuth->getPassword());
     }
 
     /**
      * Test the CurlRequest object.
      */
     public function testCurlRequestObject()
-    {   
+    {
 
         //GET CurlRequest
-        $CurlRequestGET = new MediaManager\HTTP\CurlRequest("http://www.example.com", "GET");
+        $CurlRequestGET = new MediaManager\HTTP\CurlRequest('http://www.example.com', 'GET');
 
         //Assert URL is returned correctly.
-        $this->assertEquals("http://www.example.com", $CurlRequestGET->getURL());
+        $this->assertEquals('http://www.example.com', $CurlRequestGET->getURL());
 
         //Set the request data
-        $CurlRequestGET->setData(array("fo" => "bar"));
-        $this->assertEquals(array("fo" => "bar"), $CurlRequestGET->getData());
+        $CurlRequestGET->setData(['fo' => 'bar']);
+        $this->assertEquals(['fo' => 'bar'], $CurlRequestGET->getData());
 
         //Set sending file
         $CurlRequestGET->sendFile(true);
         $this->assertEquals(true, $CurlRequestGET->isSendingFile());
 
         //Set the headers
-        $CurlRequestGET->setHeaders(array("Content-Type: application/json"));
-        $this->assertEquals(array("Content-Type: application/json"), $CurlRequestGET->getHeaders());
+        $CurlRequestGET->setHeaders(['Content-Type: application/json']);
+        $this->assertEquals(['Content-Type: application/json'], $CurlRequestGET->getHeaders());
 
         //Check type is still GET.
-        $this->assertEquals("GET", $CurlRequestGET->getType());
+        $this->assertEquals('GET', $CurlRequestGET->getType());
         //Update the request type to POST.
-        $CurlRequestGET->setType("POST");
+        $CurlRequestGET->setType('POST');
         //Assert true.
-        $this->assertEquals("POST", $CurlRequestGET->getType());
+        $this->assertEquals('POST', $CurlRequestGET->getType());
 
         //New BasicAuth object.
-        $basicAuth = new MediaManager\HTTP\BasicAuth("foo", "bar");
+        $basicAuth = new MediaManager\HTTP\BasicAuth('foo', 'bar');
 
         //Set the basic auth.
         $CurlRequestGET->setAuth($basicAuth);
@@ -91,7 +90,7 @@ class HTTPTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the JsonResponse Object
+     * Test the JsonResponse Object.
      */
     public function testJsonResponseObject()
     {
@@ -105,7 +104,7 @@ class HTTPTest extends PHPUnit_Framework_TestCase
         $this->assertNotTrue($JsonObject->hasErrors());
 
         //Check the array generated is correct.
-        $this->assertEquals(array("foo" => "bar"), $JsonObject->toArray());
+        $this->assertEquals(['foo' => 'bar'], $JsonObject->toArray());
 
         //Set the json string
         $JsonObject->setJson('{"bar": "foo"}');
@@ -116,18 +115,17 @@ class HTTPTest extends PHPUnit_Framework_TestCase
 
         //Assert hasErrors.
         $this->assertTrue($JsonObject->hasErrors());
-        $this->assertEquals("Foo bar error", $JsonObject->getErrorMessage());
+        $this->assertEquals('Foo bar error', $JsonObject->getErrorMessage());
 
         //Set error message within json response.
         $JsonObject->setJson('{"error": "Invalid error format"}');
-        $this->assertEquals("Unknown", $JsonObject->getErrorMessage());
+        $this->assertEquals('Unknown', $JsonObject->getErrorMessage());
     }
 
     /**
-     * Test the HTTP Object
+     * Test the HTTP Object.
      */
     public function testHTTPObject()
     {
-        
     }
 }

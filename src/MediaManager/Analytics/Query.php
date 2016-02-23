@@ -7,10 +7,10 @@ namespace MediaManager\Analytics;
  */
 class Query
 {
-
     /**
      * The to and from dates.
-     * @var \MediaManager\Analytics\QueryDate 
+     *
+     * @var \MediaManager\Analytics\QueryDate
      */
     private $to, $from;
 
@@ -30,10 +30,10 @@ class Query
         $this->Show = new Show('Video');
 
         //Set from date to now.
-        $this->from = new \MediaManager\Analytics\QueryDate("now");
+        $this->from = new \MediaManager\Analytics\QueryDate('now');
 
         //Set to date to now.
-        $this->to = new \MediaManager\Analytics\QueryDate("now");
+        $this->to = new \MediaManager\Analytics\QueryDate('now');
     }
 
     /**
@@ -52,6 +52,7 @@ class Query
 
     /**
      * Get the Show Query.
+     *
      * @return Show
      */
     public function get()
@@ -61,6 +62,7 @@ class Query
 
     /**
      * Get the Show Query.
+     *
      * @return Show
      */
     public function getSow()
@@ -69,7 +71,8 @@ class Query
     }
 
     /**
-     * Set the from date
+     * Set the from date.
+     *
      * @param \MediaManager\Analytics\QueryDate $from
      */
     public function setFrom(\MediaManager\Analytics\QueryDate $from)
@@ -79,6 +82,7 @@ class Query
 
     /**
      * Set the to date.
+     *
      * @param \MediaManager\Analytics\QueryDate $to
      */
     public function setTo(\MediaManager\Analytics\QueryDate $to)
@@ -87,7 +91,8 @@ class Query
     }
 
     /**
-     * Get the from QueryDate
+     * Get the from QueryDate.
+     *
      * @return \MediaManager\Analytics\QueryDate
      */
     public function getFrom()
@@ -96,7 +101,8 @@ class Query
     }
 
     /**
-     * Get the to QueryDate
+     * Get the to QueryDate.
+     *
      * @return \MediaManager\Analytics\QueryDate
      */
     public function getTo()
@@ -125,6 +131,6 @@ class Query
      */
     public function __toString()
     {
-        return '' . $this->Show;
+        return ''.$this->Show;
     }
 }

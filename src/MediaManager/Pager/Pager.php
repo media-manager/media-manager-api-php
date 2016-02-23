@@ -11,7 +11,6 @@ use MediaManager\Exception\InvalidPagerDataException as InvalidPagerDataExceptio
  */
 class Pager implements \Iterator
 {
-
     private $total;
     private $per_page;
     private $current_page;
@@ -24,8 +23,8 @@ class Pager implements \Iterator
     public function __construct(array $pageData)
     {
         //If messing data required by pager.
-        if (!isset($pageData["total"])) {
-            throw new InvalidPagerDataException("Invalid pager data", 400);
+        if (!isset($pageData['total'])) {
+            throw new InvalidPagerDataException('Invalid pager data', 400);
         }
 
         $this->total = $pageData['total'];
