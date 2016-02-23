@@ -2,8 +2,6 @@
 
 namespace MediaManager\HTTP;
 
-use MediaManager\Exception\InvalidJSONException as InvalidJSONException;
-
 class JsonResponse
 {
 
@@ -24,7 +22,7 @@ class JsonResponse
     /**
      * Parse JSON string into a assoc array. An Exception will be thrown
      * if JSON string is not valid JSON.
-     * @throws Exception
+     * @throws \MediaManager\Exception\InvalidJSONException
      */
     private function parseJSON()
     {
@@ -37,12 +35,13 @@ class JsonResponse
         //If json has an error key.
         if (isset($parsed["error"])) {
             $this->hasErrors = true;
-            $this->errorMessage = $parsed["error"]["message"];
+            $this->errorMessage = (isset($parsed["error"]["message"])) ? $parsed["error"]["message"] : "Unknown";
         }
 
         //If JSON does not parse correctly, then throw exception. q
         if (is_null($this->jsonArray)) {
-            throw new InvalidJSONException("Invalid JSON String", 400);
+            $this->hasErrors = true;
+            throw new \MediaManager\Exception\InvalidJSONException("Invalid JSON String");
         }
     }
 
@@ -80,5 +79,15 @@ class JsonResponse
     public function toArray()
     {
         return $this->jsonArray;
+    }
+
+    /**
+     * Set the JSON string
+     * @param string $jsonString
+     */
+    public function setJson($jsonString)
+    {
+        $this->jsonString = $jsonString;
+        $this->parseJSON();
     }
 }
