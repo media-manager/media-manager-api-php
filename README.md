@@ -177,30 +177,6 @@ $video = $MediaManager->ExternalAPI->getPlaylistAudioOnTemplate("{playlist_id}",
 
 You can also query your analytics.
 
-```php
-//QUERY ANALYTICS
-$query = $MediaManager->API->Analytics()->Query("{query}", "{from}", "{to}");
-```
-
-**Dates**
-
-Dates can be in pretty much any format as long as they are a valid date.
-
-```
-2015-09-01
-1st Jan 2015
-etc..
-```
-
-**Query Language**
-
-You can make use of the Media Manager Markup Langauge (MMML) or you can use the `QueryBuilder`. So using the MMML we can use the most basic query.
-
-```
-//QUERY ANALYTICS
-$query = $MediaManager->API->Analytics()->Query("SHOW Video", "2015-08-04", "2015-09-04");
-```
-
 **Query Builder**
 
 You can also make use of the Query Builder.
@@ -212,18 +188,20 @@ $Query = new MediaManager\Analytics\Query();
 You can then pass this into the `Query` method.
 
 ```php
-$query = $MediaManager->API->Analytics()->Query($Query, "2015-08-04", "2015-09-04");
+$query = $MediaManager->API->Analytics()->query($Query);
 ```
 
 This will perform the most simple query, which would be `SHOW Video`. You can build on the query builder and add conditions and so on.
 
 ```php
-$Show = $Query->Show;
+//Get current Show query.
+$Show = $Query->get();
 ```
 
 The default `SHOW` is for videos, but you can change it by calling the `Show()` method.
 
 ```php
+//Set the Show query to an Audo query.
 $Show = $Query->Show("Audio");
 ```
 

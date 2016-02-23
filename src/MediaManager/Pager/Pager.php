@@ -2,6 +2,8 @@
 
 namespace MediaManager\Pager;
 
+use MediaManager\Exception\InvalidPagerDataException as InvalidPagerDataException;
+
 /**
  * Description of Pager.
  *
@@ -20,6 +22,11 @@ class Pager implements \Iterator
 
     public function __construct(array $pageData)
     {
+        //If messing data required by pager.
+        if (!isset($pageData['total'])) {
+            throw new InvalidPagerDataException('Invalid pager data', 400);
+        }
+
         $this->total = $pageData['total'];
         $this->per_page = $pageData['per_page'];
         $this->current_page = $pageData['current_page'];

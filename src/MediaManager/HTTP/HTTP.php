@@ -3,12 +3,19 @@
 namespace MediaManager\HTTP;
 
 /**
- * Description of HTTP.
+ * Perform a HTTP request to a given URL based on a CurlRequest.
  *
  * @author Dale
  */
 class HTTP
 {
+    /**
+     * The Request.
+     *
+     * @var \MediaManager\HTTP\CurlRequest
+     */
+    private $request;
+
     /**
      * The Global Params.
      *
@@ -17,86 +24,64 @@ class HTTP
     private $globalParams = [];
 
     /**
+     * Create new HTTP request.
+     *
+     * @param \MediaManager\HTTP\CurlRequest $request
+     */
+    public function __construct(\MediaManager\HTTP\CurlRequest $request)
+    {
+        $this->request = $request;
+    }
+
+    /**
      * Perform a GET request.
      *
      * @param type $url
      * @param type $params
      */
-    public function Get($url, array $params = [])
+    public function Get()
     {
-        return $this->Request($url, $params, 'GET');
+        //Set the type to GET.
+        $this->request->setType('GET');
+
+        //Do the request.
+        $response = $this->Request();
+
+        //Return resutls as an array.
+        return $response->toArray();
     }
 
     /**
-     * Send a HTTP request.
+     * Get the HTTP request object.
      *
-     * @param type  $url
-     * @param type  $data
-     * @param type  $type
-     * @param type  $sendingFile
-     * @param type  $headers
-     * @param array $auth
-     *
-     * @return type
+     * @return \MediaManager\HTTP\CurlRequest
      */
-    public function Request($url, $data = [], $type = 'POST', $sendingFile = false, $headers = false, $auth = false)
+    public function getRequest()
+    {
+        return $this->request;
+    }
+
+    /**
+     * Make the HTTP request.
+     *
+     * @return \MediaManager\HTTP\JsonResponse
+     */
+    public function Request()
     {
 
-        //MERGE GLOBAL PARAMS INTO DATA PASSED.
-        $data = array_merge($data, $this->globalParams);
+        //Merge the global params with the request params.
+        $data = array_merge($this->request->getData(), $this->globalParams);
 
-        //IF NOT SENDING FILE, THEN CONVERT PARAMS INTO QUERY STRING.
-        $data = (!$sendingFile) ? http_build_query($data, '', '&') : $data;
+        //Update the request params with the new combined params.
+        $this->request->setData($data);
 
-        //IF TYPE A GET REQUEST.
-        $url .= ($type != 'POST' && $type != 'PUT') ? '?'.$data : '';
+        //Do the request.
+        $result = $this->request->doRequest();
 
-        //SETUP CURL REQUEST
-        $ch = curl_init();
+        //The JSON response.
+        $Response = new JsonResponse($result);
 
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_REFERER, $_SERVER['HTTP_HOST']);
-
-        //IF ANY HEADERS PASSED, THEN SET THEM.
-        if ($headers) {
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        }
-
-        //IF SENDING AUTH
-        if ($auth) {
-            curl_setopt($ch, CURLOPT_USERPWD, "{$auth['username']}:{$auth['password']}");
-        }
-
-        //IF POST TYPE
-        if ($type == 'POST') {
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        } elseif ($type == 'PUT') {
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $type);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        } else {
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $type);
-        }
-
-        $result = curl_exec($ch);
-        curl_close($ch);
-
-        $json = json_decode($result, true);
-
-        //IF VALID JSON, THEN RETURN THAT
-        if (!is_null($json)) {
-
-            //IF AN ERROR HAS HAPPEND
-            if (isset($json['error'])) {
-                return ['error' => $json['error']['message']];
-            }
-
-            return $json;
-        }
-
-        return $result;
+        return $Response;
     }
 
     /**
@@ -107,5 +92,15 @@ class HTTP
     public function setGlobalParams(array $params)
     {
         $this->globalParams = array_merge($params, $this->globalParams);
+    }
+
+    /**
+     * Get Global params.
+     *
+     * @return type
+     */
+    public function getGlobalParams()
+    {
+        return $this->globalParams;
     }
 }

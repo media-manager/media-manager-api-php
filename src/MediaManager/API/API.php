@@ -21,11 +21,6 @@ class API
     protected $HTTP;
 
     /**
-     * @var Analytics
-     */
-    private $Analytics;
-
-    /**
      * The Client Shortname.
      *
      * @var type
@@ -38,6 +33,13 @@ class API
      * @var type
      */
     private $apiVersion = 1;
+
+    /**
+     * Use a CurlRequest.
+     *
+     * @var CurlRequest
+     */
+    private $request;
 
     /**
      * The API Key.
@@ -54,13 +56,6 @@ class API
     protected $BASE_URI = 'https://{client}.getmediamanager.com/api/v{version}';
 
     /**
-     * Filters to apply to API calls.
-     *
-     * @var type
-     */
-    private $filters = [];
-
-    /**
      * A API Object.
      *
      * @param type $client
@@ -68,31 +63,32 @@ class API
      */
     public function __construct($client, $apiKey, $version = 1)
     {
+        //Set the global fields.
         $this->client = $client;
         $this->apiVersion = $version;
         $this->apiKey = $apiKey;
 
-        //UPDATEA THE BASE URI TO MATCH CLIENTS CREDS
+        //Parse the base uri based on client and version.
         $this->BASE_URI = str_replace(['{client}', '{version}'], [$client, $version], $this->BASE_URI);
 
+        //The CurlRequest Object
+        $this->request = new \MediaManager\HTTP\CurlRequest($this->BASE_URI);
+
         //ATTACH THE HTTP OBJECT
-        $this->HTTP = new HTTP();
+        $this->HTTP = new HTTP($this->request);
 
-        //SET THE API KEY TO BE PASSED TO ALL REQUESTS.
+        //Set the API key as a global param.
         $this->HTTP->setGlobalParams(['_apikey' => $apiKey]);
-
-        //THE ANALYTICS BUILDER
-        $this->Analytics = new Analytics($this->BASE_URI, $this->HTTP);
     }
 
     /**
-     * Get the Analytics object.
+     * Get the Analyics object.
      *
-     * @return type
+     * @return Analytics
      */
     public function Analytics()
     {
-        return $this->Analytics;
+        return new Analytics($this->HTTP);
     }
 
     /**
@@ -135,8 +131,11 @@ class API
     {
         $api = '/client';
 
+        //Set the request URL to clients API
+        $this->request->setURL($this->BASE_URI.$api);
+
         //GET CLIENT DATA
-        $response = $this->HTTP->Get($this->BASE_URI.$api);
+        $response = $this->HTTP->Get();
 
         return $response;
     }
@@ -145,8 +144,10 @@ class API
     {
         $api = '/templates';
 
-        //GET CLIENT DATA
-        $response = $this->HTTP->Get($this->BASE_URI.$api);
+        //Set the request URL to clients API.
+        $this->request->setURL($this->BASE_URI.$api);
+
+        $response = $this->HTTP->Get();
 
         return $response;
     }
@@ -162,8 +163,11 @@ class API
     {
         $api = '/video/'.$videoid;
 
+        //Set the request URL to clients API.
+        $this->request->setURL($this->BASE_URI.$api);
+
         //GET CLIENT DATA
-        $response = $this->HTTP->Get($this->BASE_URI.$api);
+        $response = $this->HTTP->Get();
 
         return $response;
     }
@@ -172,8 +176,11 @@ class API
     {
         $api = '/playlists';
 
+        //Set the request URL to clients API.
+        $this->request->setURL($this->BASE_URI.$api);
+
         //GET CLIENT DATA
-        $response = $this->HTTP->Get($this->BASE_URI.$api);
+        $response = $this->HTTP->Get();
 
         return $response;
     }
@@ -187,8 +194,11 @@ class API
     {
         $api = '/videos';
 
-        //GET CLIENT DATA
-        $response = $this->HTTP->Get($this->BASE_URI.$api);
+        //Set the request URL to clients API.
+        $this->request->setURL($this->BASE_URI.$api);
+
+        //Get API results
+        $response = $this->HTTP->Get();
 
         return new Pager($response);
     }
