@@ -3,12 +3,18 @@
 namespace MediaManager\HTTP;
 
 /**
- * Description of HTTP.
+ * Perform a HTTP request to a given URL based on a CurlRequest.
  *
  * @author Dale
  */
 class HTTP
 {
+
+    /**
+     * The Request
+     * @var \MediaManager\HTTP\CurlRequest 
+     */
+    private $request;
 
     /**
      * The Global Params.
@@ -18,32 +24,29 @@ class HTTP
     private $globalParams = [];
 
     /**
+     * Create new HTTP request.
+     * @param \MediaManager\HTTP\CurlRequest $request
+     */
+    public function __construct(CurlRequest $request)
+    {
+        $this->request = $request;
+    }
+
+    /**
      * Perform a GET request.
      *
      * @param type $url
      * @param type $params
      */
-    public function Get($url, array $params = [])
+    public function Get()
     {
-        //New CurlRequest
-        $CurlRequest = new CurlRequest($url);
-
-        //Set the request data.
-        $CurlRequest->setData($params);
+        //Set the type to GET.
+        $this->request->setType("GET");
 
         //Do the request.
-        $response = $this->Request($CurlRequest);
+        $response = $this->Request();
 
         return $response->toArray();
-    }
-
-    /**
-     * Get the HTTP Host.
-     * @return string
-     */
-    public function getHost()
-    {
-        return $_SERVER["HTTP_HOST"];
     }
 
     /**
@@ -58,55 +61,17 @@ class HTTP
      *
      * @return JsonResponse
      */
-    public function Request(CurlRequest $request)
+    public function Request()
     {
-        //MERGE GLOBAL PARAMS INTO DATA PASSED.
-        $data = array_merge($request->getData(), $this->globalParams);
 
-        //IF NOT SENDING FILE, THEN CONVERT PARAMS INTO QUERY STRING.
-        $data = (!$request->isSendingFile()) ? http_build_query($data, '', '&') : $data;
-
-        //IF TYPE A GET REQUEST.
-        $url = $request->getURL();
-        $url .= ($request->getType() != 'POST' && $request->getType() != 'PUT') ? '?' . $data : '';
-
-        //SETUP CURL REQUEST
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_REFERER, $this->getHost());
-
-        //IF ANY HEADERS PASSED, THEN SET THEM.
-        if ($request->hasHeaders()) {
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $request->getHeaders());
-        }
-
-        //IF SENDING AUTH
-        if ($request->shouldAuth()) {
-
-            //Get the basic auth crentials.
-            $basicAuth = $request->getBasicAuth();
-
-            curl_setopt($ch, CURLOPT_USERPWD, $basicAuth->getUsername() . ":" . $basicAuth->getPassword());
-        }
-
-        //IF POST TYPE
-        if ($request->getType() == 'POST') {
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $request->getData());
-        } elseif ($request->getType() == 'PUT') {
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $request->getType());
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $request->getData());
-        } else {
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $request->getType());
-        }
-
-        $result = curl_exec($ch);
+        //Merge the global params with the request params.
+        $data = array_merge($this->request->getData(), $this->globalParams);
         
-        //Close curl
-        curl_close($ch);
+        //Update the request params with the new combined params.
+        $this->request->setData($data);
+
+        //Do the request.
+        $result = $this->request->doRequest();
 
         //The JSON response.
         $Response = new JsonResponse($result);
