@@ -94,4 +94,13 @@ class Condition
     {
         $this->key = $key;
     }
+    
+    /**
+     * Set the key
+     * @param type $key
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+    }
 }
