@@ -8,7 +8,6 @@ namespace MediaManager\HTTP;
  */
 class CurlRequest
 {
-
     private $initalUrl;
     private $url;
     private $data = [];
@@ -19,9 +18,10 @@ class CurlRequest
 
     /**
      * Create a new CurlRequest object.
+     *
      * @param type $url
      */
-    public function __construct($url, $type = "GET")
+    public function __construct($url, $type = 'GET')
     {
         //Original URL. Sometimes URL may be appended
         $this->initalUrl = $url;
@@ -35,16 +35,18 @@ class CurlRequest
 
     /**
      * Get the request URL.
+     *
      * @return string
      */
     public function getURL()
     {
         return $this->url;
     }
-    
+
     /**
      * Get the initial URL passed to CurlRequest object. This allows you to
      * consinder this the "base url".
+     *
      * @return type
      */
     public function getInitialURL()
@@ -54,6 +56,7 @@ class CurlRequest
 
     /**
      * Set the CurlRequest URL.
+     *
      * @param type $url
      */
     public function setURL($url)
@@ -63,6 +66,7 @@ class CurlRequest
 
     /**
      * Set CurlRequest data that is passed along.
+     *
      * @param array $data
      */
     public function setData(array $data)
@@ -72,7 +76,8 @@ class CurlRequest
 
     /**
      * Is a file being sent with the request.
-     * @return boolean
+     *
+     * @return bool
      */
     public function isSendingFile()
     {
@@ -81,6 +86,7 @@ class CurlRequest
 
     /**
      * If request will be sending a file.
+     *
      * @param type $boolean
      */
     public function sendFile($boolean)
@@ -90,6 +96,7 @@ class CurlRequest
 
     /**
      * Get request data (the request parameters).
+     *
      * @return array
      */
     public function getData()
@@ -99,7 +106,8 @@ class CurlRequest
 
     /**
      * If request has headers to be sent.
-     * @return boolean TRUE|FALSE
+     *
+     * @return bool TRUE|FALSE
      */
     public function hasHeaders()
     {
@@ -108,6 +116,7 @@ class CurlRequest
 
     /**
      * Get request headers to be sent.
+     *
      * @return type
      */
     public function getHeaders()
@@ -117,6 +126,7 @@ class CurlRequest
 
     /**
      * Set the request headers to be sent.
+     *
      * @param array $headers
      */
     public function setHeaders(array $headers)
@@ -126,6 +136,7 @@ class CurlRequest
 
     /**
      * Get the request type (GET,POST,DELETE,PUT,ect).
+     *
      * @return string
      */
     public function getType()
@@ -135,6 +146,7 @@ class CurlRequest
 
     /**
      * Set the request type.
+     *
      * @param string $type
      */
     public function setType($type)
@@ -144,15 +156,17 @@ class CurlRequest
 
     /**
      * If auth creds should be sent with request (HTTP Basic Auth).
-     * @return boolean
+     *
+     * @return bool
      */
     public function shouldAuth()
     {
-        return ($this->auth !== false);
+        return $this->auth !== false;
     }
 
     /**
      * Set the basic auth.
+     *
      * @param \MediaManager\HTTP\BasicAuth $auth
      */
     public function setAuth(BasicAuth $auth)
@@ -162,6 +176,7 @@ class CurlRequest
 
     /**
      * Get the basic auth credentials.
+     *
      * @return \MediaManager\HTTP\BasicAuth
      */
     public function getBasicAuth()
@@ -171,6 +186,7 @@ class CurlRequest
 
     /**
      * Do the CurlRequest, Returns a string (usually JSON).
+     *
      * @return string
      */
     public function doRequest()
@@ -183,14 +199,14 @@ class CurlRequest
 
         //IF TYPE A GET REQUEST.
         $url = $this->getURL();
-        $url .= ($this->getType() != 'POST' && $this->getType() != 'PUT') ? '?' . $data : '';
+        $url .= ($this->getType() != 'POST' && $this->getType() != 'PUT') ? '?'.$data : '';
 
         //SETUP CURL REQUEST
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_REFERER, $_SERVER["HTTP_HOST"]);
+        curl_setopt($ch, CURLOPT_REFERER, $_SERVER['HTTP_HOST']);
 
         //IF ANY HEADERS PASSED, THEN SET THEM.
         if ($this->hasHeaders()) {
@@ -203,7 +219,7 @@ class CurlRequest
             //Get the basic auth crentials.
             $basicAuth = $this->getBasicAuth();
 
-            curl_setopt($ch, CURLOPT_USERPWD, $basicAuth->getUsername() . ":" . $basicAuth->getPassword());
+            curl_setopt($ch, CURLOPT_USERPWD, $basicAuth->getUsername().':'.$basicAuth->getPassword());
         }
 
         //IF POST TYPE

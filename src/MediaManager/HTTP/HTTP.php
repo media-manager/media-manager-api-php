@@ -9,10 +9,10 @@ namespace MediaManager\HTTP;
  */
 class HTTP
 {
-
     /**
-     * The Request
-     * @var \MediaManager\HTTP\CurlRequest 
+     * The Request.
+     *
+     * @var \MediaManager\HTTP\CurlRequest
      */
     private $request;
 
@@ -25,6 +25,7 @@ class HTTP
 
     /**
      * Create new HTTP request.
+     *
      * @param \MediaManager\HTTP\CurlRequest $request
      */
     public function __construct(\MediaManager\HTTP\CurlRequest $request)
@@ -41,7 +42,7 @@ class HTTP
     public function Get()
     {
         //Set the type to GET.
-        $this->request->setType("GET");
+        $this->request->setType('GET');
 
         //Do the request.
         $response = $this->Request();
@@ -52,7 +53,8 @@ class HTTP
 
     /**
      * Get the HTTP request object.
-     * @return \MediaManager\HTTP\CurlRequest 
+     *
+     * @return \MediaManager\HTTP\CurlRequest
      */
     public function getRequest()
     {
@@ -61,6 +63,7 @@ class HTTP
 
     /**
      * Make the HTTP request.
+     *
      * @return \MediaManager\HTTP\JsonResponse
      */
     public function Request()
@@ -93,6 +96,7 @@ class HTTP
 
     /**
      * Get Global params.
+     *
      * @return type
      */
     public function getGlobalParams()

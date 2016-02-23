@@ -4,11 +4,10 @@ namespace MediaManager\HTTP;
 
 class JsonResponse
 {
-
-    private $jsonString = "";
-    private $jsonArray = array();
+    private $jsonString = '';
+    private $jsonArray = [];
     private $hasErrors = false;
-    private $errorMessage = "";
+    private $errorMessage = '';
 
     public function __construct($jsonString)
     {
@@ -22,6 +21,7 @@ class JsonResponse
     /**
      * Parse JSON string into a assoc array. An Exception will be thrown
      * if JSON string is not valid JSON.
+     *
      * @throws \MediaManager\Exception\InvalidJSONException
      */
     private function parseJSON()
@@ -33,20 +33,21 @@ class JsonResponse
         $this->jsonArray = $parsed;
 
         //If json has an error key.
-        if (isset($parsed["error"])) {
+        if (isset($parsed['error'])) {
             $this->hasErrors = true;
-            $this->errorMessage = (isset($parsed["error"]["message"])) ? $parsed["error"]["message"] : "Unknown";
+            $this->errorMessage = (isset($parsed['error']['message'])) ? $parsed['error']['message'] : 'Unknown';
         }
 
         //If JSON does not parse correctly, then throw exception. q
         if (is_null($this->jsonArray)) {
             $this->hasErrors = true;
-            throw new \MediaManager\Exception\InvalidJSONException("Invalid JSON String");
+            throw new \MediaManager\Exception\InvalidJSONException('Invalid JSON String');
         }
     }
 
     /**
      * JSONReponse to string. Simply returns original string.
+     *
      * @return string
      */
     public function toString()
@@ -56,6 +57,7 @@ class JsonResponse
 
     /**
      * Get the error message from a json response (if any).
+     *
      * @return string
      */
     public function getErrorMessage()
@@ -65,6 +67,7 @@ class JsonResponse
 
     /**
      * CHeck if JSON has error message within it.
+     *
      * @return type
      */
     public function hasErrors()
@@ -74,6 +77,7 @@ class JsonResponse
 
     /**
      * Return JSON as an assoc array.
+     *
      * @return array
      */
     public function toArray()
@@ -82,7 +86,8 @@ class JsonResponse
     }
 
     /**
-     * Set the JSON string
+     * Set the JSON string.
+     *
      * @param string $jsonString
      */
     public function setJson($jsonString)

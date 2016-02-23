@@ -8,17 +8,18 @@ namespace MediaManager\Analytics;
  */
 class QueryDate
 {
-
     private $dateString;
 
     /**
-     * The DateTime object
-     * @var DateTime 
+     * The DateTime object.
+     *
+     * @var DateTime
      */
     private $date;
 
     /**
-     * Create new QueryDate
+     * Create new QueryDate.
+     *
      * @param type $date
      */
     public function __construct($date)
@@ -37,6 +38,7 @@ class QueryDate
 
     /**
      * Get the date as a string format. Simply returns original string.
+     *
      * @return type
      */
     public function __toString()
@@ -46,34 +48,38 @@ class QueryDate
 
     /**
      * Return the date in a certain format.
+     *
      * @param string $format
      */
-    public function get($format = "Y-m-d")
+    public function get($format = 'Y-m-d')
     {
         return $this->date->format($format);
     }
 
     /**
      * Add so many days to the date.
+     *
      * @param int $noOfDays
      */
     public function addDays($noOfDays)
     {
-        $this->add("P" . $noOfDays . "D");
+        $this->add('P'.$noOfDays.'D');
     }
 
     /**
-     * substract days from dat.e
+     * substract days from dat.e.
+     *
      * @param int $noOfDays
      */
     public function subDays($noOfDays)
     {
-        $this->sub("P" . $noOfDays . "D");
+        $this->sub('P'.$noOfDays.'D');
     }
 
     /**
      * Add to a DateTime using the DateInterval. Simply pass the string.
      * e.g P20D for 20 Days.
+     *
      * @param string $intervalString
      */
     public function add($intervalString)
@@ -83,6 +89,7 @@ class QueryDate
 
     /**
      * Substract from a DateTime using the DateInterval.
+     *
      * @param string $intervalString
      */
     public function sub($intervalString)

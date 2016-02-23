@@ -7,21 +7,23 @@ namespace MediaManager\Analytics;
  */
 class Show
 {
-
     /**
      * The SHOW value, defaults to Video.
-     * @var type 
+     *
+     * @var type
      */
     private $show = 'Video';
 
     /**
      * An array of conditions.
-     * @var array 
+     *
+     * @var array
      */
     private $conditions = [];
 
     /**
-     * Create new Show Object
+     * Create new Show Object.
+     *
      * @param string $show The SHOW value as a string. (e.g Video, Template).
      */
     public function __construct($show)
@@ -31,9 +33,11 @@ class Show
 
     /**
      * Add a new condition to Show object.
+     *
      * @param string $key
      * @param string $value
      * @param string $operator
+     *
      * @return \MediaManager\Analytics\Condition
      */
     public function Condition($key, $value, $operator = 'IS')
@@ -60,12 +64,13 @@ class Show
 
     /**
      * Convert SHOW object to MMQL string.
+     *
      * @return string
      */
     public function __toString()
     {
         //THE QUERY
-        $query = 'SHOW ' . $this->show;
+        $query = 'SHOW '.$this->show;
 
         //IF HAS CONDITIONS
         if (!empty($this->conditions)) {
@@ -75,7 +80,7 @@ class Show
                 $query .= $condition;
 
                 if (isset($this->conditions[$index + 1])) {
-                    $query .= ' ' . $condition->logical . ' ';
+                    $query .= ' '.$condition->logical.' ';
                 }
             }
         }
