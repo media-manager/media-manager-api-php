@@ -5,54 +5,53 @@ namespace MediaManager\Analytics;
 use MediaManager\Pager\Pager as Pager;
 
 /**
- * Description of Analytics.
- *
- * @author Dale
+ * The Analytics Object used for querying Media Manager analytics.
  */
 class Analytics
 {
-    /**
-     * The API URL.
-     *
-     * @var string
-     */
-    private $API_URL;
 
     /**
      * The HTTP Object.
      *
-     * @var HTTP
+     * @var MediaManager\HTTP\HTTP
      */
     private $HTTP;
 
     /**
-     * New query Object.
-     *
-     * @param type $apiURL
-     * @param type $HTTP
+     * New Analytics object
+     * @param \MediaManager\HTTP\HTTP $HTTP
      */
-    public function __construct($apiURL, $HTTP)
+    public function __construct(\MediaManager\HTTP\HTTP $HTTP)
     {
-        $this->API_URL = $apiURL;
         $this->HTTP = $HTTP;
     }
 
     /**
-     * Run a query on the analytics.
-     *
-     * @param type $query
-     * @param type $from
-     * @param type $to
-     *
+     * Perform a raw query on Media Manager
+     * @param string $query The MMQL string
+     * @param string $from The from date as a string
+     * @param type $to The to date as a string
      * @return Pager
      */
-    public function Query($query, $from, $to)
+    public function query(\MediaManager\Analytics\Query $Query)
     {
-        $api = "/analytics/{$query}/{$from}/{$to}";
+        $api = "/analytics/" . $Query->get() . "/" . $Query->getFrom()->get() . "/" . $Query->getTo()->get();
+
+        //Set the request URL to clients API
+        $this->HTTP->getRequest()->setURL($this->HTTP->getRequest()->getInitialURL() . $api);
 
         //GET CLIENT DATA
-        $response = $this->HTTP->Get($this->API_URL.$api);
-
+        $response = $this->HTTP->Get();
+        
         return new Pager($response);
+    }
+
+    /**
+     * Get the HTTP object.
+     * @return MediaManager\HTTP\HTTP
+     */
+    public function getHTTP()
+    {
+        return $this->HTTP;
     }
 }
