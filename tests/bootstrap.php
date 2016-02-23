@@ -1,6 +1,6 @@
 <?php
 //Set error mode to only show "errors" not warning,ect.
-error_reporting(E_ERROR);
+error_reporting(E_ALL);
 
 // Time zone
 date_default_timezone_set('UTC');
