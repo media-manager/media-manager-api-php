@@ -2,7 +2,7 @@
 
 namespace MediaManager\Exception;
 
-class InvalidJSONException extends Exception
+class InvalidJSONException extends \Exception
 {
     
 }

@@ -2,7 +2,7 @@
 
 namespace MediaManager\Exception;
 
-class InvalidPagerDataException extends Exception
+class InvalidPagerDataException extends \Exception
 {
     
 }
