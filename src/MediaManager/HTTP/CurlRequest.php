@@ -9,6 +9,7 @@ namespace MediaManager\HTTP;
 class CurlRequest
 {
 
+    private $initalUrl;
     private $url;
     private $data = [];
     private $type = 'GET';
@@ -22,7 +23,13 @@ class CurlRequest
      */
     public function __construct($url, $type = "GET")
     {
+        //Original URL. Sometimes URL may be appended
+        $this->initalUrl = $url;
+
+        //URL used by CurlRequest
         $this->url = $url;
+
+        //The request Type (GET,POST, etc).
         $this->type = $type;
     }
 
@@ -33,6 +40,16 @@ class CurlRequest
     public function getURL()
     {
         return $this->url;
+    }
+    
+    /**
+     * Get the initial URL passed to CurlRequest object. This allows you to
+     * consinder this the "base url".
+     * @return type
+     */
+    public function getInitialURL()
+    {
+        return $this->initalUrl;
     }
 
     /**
