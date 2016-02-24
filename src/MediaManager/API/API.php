@@ -13,7 +13,6 @@ use MediaManager\Pager\Pager as Pager;
  */
 class API
 {
-
     /**
      * The HTTP Object.
      *
@@ -58,8 +57,9 @@ class API
 
     /**
      * Create new API instance.
-     * @param string $client The client shortname
-     * @param string $apiKey The API Key
+     *
+     * @param string                         $client  The client shortname
+     * @param string                         $apiKey  The API Key
      * @param \MediaManager\HTTP\CurlRequest $request
      */
     public function __construct($client, $apiKey, \MediaManager\HTTP\CurlRequest $request)
@@ -91,9 +91,10 @@ class API
     {
         return new Analytics($this->HTTP);
     }
-    
+
     /**
      * Get the HTTP Object.
+     *
      * @return HTTP
      */
     public function getHTTP()
@@ -142,7 +143,7 @@ class API
         $api = '/client';
 
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
+        $this->request->setURL($this->BASE_URI.$api);
 
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
@@ -155,7 +156,7 @@ class API
         $api = '/templates';
 
         //Set the request URL to clients API.
-        $this->request->setURL($this->BASE_URI . $api);
+        $this->request->setURL($this->BASE_URI.$api);
 
         $response = $this->HTTP->Get();
 
@@ -171,10 +172,10 @@ class API
      */
     public function getVideo($videoid)
     {
-        $api = '/video/' . $videoid;
+        $api = '/video/'.$videoid;
 
         //Set the request URL to clients API.
-        $this->request->setURL($this->BASE_URI . $api);
+        $this->request->setURL($this->BASE_URI.$api);
 
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
@@ -187,7 +188,7 @@ class API
         $api = '/playlists';
 
         //Set the request URL to clients API.
-        $this->request->setURL($this->BASE_URI . $api);
+        $this->request->setURL($this->BASE_URI.$api);
 
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
@@ -205,7 +206,7 @@ class API
         $api = '/videos';
 
         //Set the request URL to clients API.
-        $this->request->setURL($this->BASE_URI . $api);
+        $this->request->setURL($this->BASE_URI.$api);
 
         //Get API results
         $response = $this->HTTP->Get();
