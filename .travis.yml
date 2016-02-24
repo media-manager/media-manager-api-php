@@ -11,5 +11,7 @@ matrix:
         - php: hhvm
 before_script:
     - composer install
+before_install:
+  - pip install --user codecov
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - codecov
