@@ -8,7 +8,6 @@ namespace MediaManager\HTTP;
  */
 class CurlRequest
 {
-
     private $initalUrl;
     private $url;
     private $data = [];
@@ -203,7 +202,7 @@ class CurlRequest
 
         //IF TYPE A GET REQUEST.
         $url = $this->getURL();
-        $url .= ($this->getType() != 'POST' && $this->getType() != 'PUT') ? '?' . $data : '';
+        $url .= ($this->getType() != 'POST' && $this->getType() != 'PUT') ? '?'.$data : '';
 
         //SETUP CURL REQUEST
         $ch = curl_init();
@@ -223,7 +222,7 @@ class CurlRequest
             //Get the basic auth crentials.
             $basicAuth = $this->getBasicAuth();
 
-            curl_setopt($ch, CURLOPT_USERPWD, $basicAuth->getUsername() . ':' . $basicAuth->getPassword());
+            curl_setopt($ch, CURLOPT_USERPWD, $basicAuth->getUsername().':'.$basicAuth->getPassword());
         }
 
         //IF POST TYPE

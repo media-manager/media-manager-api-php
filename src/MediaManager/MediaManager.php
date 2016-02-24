@@ -7,20 +7,22 @@ use MediaManager\API\External as External;
 
 /**
  * The Media Manager object to access external or general API.
+ *
  * @author Dale
  */
 class MediaManager
 {
-
     /**
      * The api key and client shortname.
-     * @var string 
+     *
+     * @var string
      */
     private $apikey;
     private $client;
 
     /**
-     * The request gateway
+     * The request gateway.
+     *
      * @var \MediaManager\HTTP\CurlRequest
      */
     private $request;
@@ -40,6 +42,7 @@ class MediaManager
 
     /**
      * Get the API object.
+     *
      * @return API
      */
     public function api()
@@ -49,6 +52,7 @@ class MediaManager
 
     /**
      * Get the External object.
+     *
      * @return External
      */
     public function external()
@@ -58,6 +62,7 @@ class MediaManager
 
     /**
      * Get the APIKey.
+     *
      * @return string
      */
     public function getAPIKey()
@@ -67,6 +72,7 @@ class MediaManager
 
     /**
      * Get the client shortname.
+     *
      * @return string
      */
     public function getClient()
