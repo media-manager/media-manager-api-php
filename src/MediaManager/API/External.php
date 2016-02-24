@@ -8,11 +8,12 @@ namespace MediaManager\API;
  * @author Dale
  */
 class External extends API
-{   
+{
     /**
      * Create External API object.
-     * @param type $client
-     * @param type $apiKey
+     *
+     * @param type                      $client
+     * @param type                      $apiKey
      * @param MediaManager\HTTP\Request $request
      */
     public function __construct($client, $apiKey, $request)
