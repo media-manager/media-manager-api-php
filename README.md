@@ -29,8 +29,11 @@ Now you can require the ``autoload``.
 ```php
 require 'vendor/autoload.php';
 
+//Create the gateway or request used to get data.
+$gateway = new MediaManager\HTTP\CurlRequest();
+
 //CREATE MEDIAMANAGER INSTANCE
-$MediaManager = new \MediaManager\MediaManager("{shortname}", "{apiKey}");
+$MediaManager = new \MediaManager\MediaManager("{shortname}", "{apiKey}", $gateway);
 ```
 
 ## Client
@@ -38,7 +41,7 @@ $MediaManager = new \MediaManager\MediaManager("{shortname}", "{apiKey}");
 You can get your client data by using the `getClient` method.
 
 ```php
-$client = $MediaManager->API->getClient();
+$client = $MediaManager->api()->getClient();
 ```
 
 ## Templates
@@ -48,7 +51,7 @@ $client = $MediaManager->API->getClient();
 You can get all templates attached to your account.
 
 ```php
-$videos = $MediaManager->API->getTemplates();
+$videos = $MediaManager->api()->getTemplates();
 ```
 
 ## Playlists
@@ -58,7 +61,7 @@ $videos = $MediaManager->API->getTemplates();
 You can get all playlists attached to your account.
 
 ```php
-$videos = $MediaManager->API->getPlaylists();
+$videos = $MediaManager->api()->getPlaylists();
 ```
 
 ## Videos
@@ -68,13 +71,13 @@ You can get all your videos or a single video.
 **Getting all videos**
 
 ```php
-$videos = $MediaManager->API->getVideos();
+$videos = $MediaManager->api()->getVideos();
 ```
 
 **Getting a video**
 
 ```php
-$videos = $MediaManager->API->getVideo("{videoid}");
+$videos = $MediaManager->api()->getVideo("{videoid}");
 ```
 
 ## External
@@ -102,7 +105,7 @@ $mostViewed = $MediaManager->ExternalAPI->getTemplateMostViewedVideos("{external
 You can use the recommend API to get recommendations based on a video you pass.
 
 ```php
-$mostViewed = $MediaManager->ExternalAPI->recommendTemplateVideo("{external_template_id}","{videoid}");
+$mostViewed = $MediaManager->external()->recommendTemplateVideo("{external_template_id}","{videoid}");
 ```
 
 **Latest videos**
@@ -110,7 +113,7 @@ $mostViewed = $MediaManager->ExternalAPI->recommendTemplateVideo("{external_temp
 Get the latest videos on template
 
 ```php
-$latest = $MediaManager->ExternalAPI->getTemplateLatestVideos("{external_template_id}");
+$latest = $MediaManager->external()->getTemplateLatestVideos("{external_template_id}");
 ```
 
 **Get video on template**
@@ -118,7 +121,7 @@ $latest = $MediaManager->ExternalAPI->getTemplateLatestVideos("{external_templat
 Get a video details thats published to template.
 
 ```php
-$video = $MediaManager->ExternalAPI->getTemplateVideo("{external_template_id}", "{videoid}");
+$video = $MediaManager->external()->getTemplateVideo("{external_template_id}", "{videoid}");
 ```
 
 **Get videos on template**
@@ -126,7 +129,7 @@ $video = $MediaManager->ExternalAPI->getTemplateVideo("{external_template_id}", 
 Get all videos on template.
 
 ```php
-$videos = $MediaManager->ExternalAPI->getTemplateVideos("{external_template_id}");
+$videos = $MediaManager->external()->getTemplateVideos("{external_template_id}");
 ```
 
 **Get audios on template**
@@ -134,7 +137,7 @@ $videos = $MediaManager->ExternalAPI->getTemplateVideos("{external_template_id}"
 Get all audios on template.
 
 ```php
-$audios = $MediaManager->ExternalAPI->getTemplateAudios("{external_template_id}");
+$audios = $MediaManager->external()->getTemplateAudios("{external_template_id}");
 ```
 
 ###Playlists
@@ -146,7 +149,7 @@ All these playlist APIS will require a `templateID` also. They allow you filter 
 Get all videos published to a playlist
 
 ```php
-$videos = $MediaManager->ExternalAPI->getPlaylistVideosOnTemplate("{playlist_id}","{external_template_id}");
+$videos = $MediaManager->external()->getPlaylistVideosOnTemplate("{playlist_id}","{external_template_id}");
 ```
 
 **Get audios in playlist**
@@ -154,7 +157,7 @@ $videos = $MediaManager->ExternalAPI->getPlaylistVideosOnTemplate("{playlist_id}
 Get all audios published to a playlist
 
 ```php
-$audios = $MediaManager->ExternalAPI->getPlaylistAudiosOnTemplate("{playlist_id}","{external_template_id}");
+$audios = $MediaManager->external()->getPlaylistAudiosOnTemplate("{playlist_id}","{external_template_id}");
 ```
 
 **Get video in playlist**
@@ -162,7 +165,7 @@ $audios = $MediaManager->ExternalAPI->getPlaylistAudiosOnTemplate("{playlist_id}
 Get video published to a playlist
 
 ```php
-$video = $MediaManager->ExternalAPI->getPlaylistVideoOnTemplate("{playlist_id}","{external_template_id}","{video_id"});
+$video = $MediaManager->external()->getPlaylistVideoOnTemplate("{playlist_id}","{external_template_id}","{video_id"});
 ```
 
 **Get audio in playlist**
@@ -170,7 +173,7 @@ $video = $MediaManager->ExternalAPI->getPlaylistVideoOnTemplate("{playlist_id}",
 Get audio published to a playlist
 
 ```php
-$video = $MediaManager->ExternalAPI->getPlaylistAudioOnTemplate("{playlist_id}","{external_template_id}","{audio_id"});
+$video = $MediaManager->external()->getPlaylistAudioOnTemplate("{playlist_id}","{external_template_id}","{audio_id"});
 ```
 
 ## Analytics
