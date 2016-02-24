@@ -55,4 +55,22 @@ class MediaManager
     {
         return new External($this->client, $this->apikey, $this->request);
     }
+
+    /**
+     * Get the APIKey.
+     * @return string
+     */
+    public function getAPIKey()
+    {
+        return $this->apikey;
+    }
+
+    /**
+     * Get the client shortname.
+     * @return string
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
 }
