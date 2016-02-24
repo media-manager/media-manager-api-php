@@ -274,7 +274,7 @@ class External extends API
         $videos = $this->getTemplateVideos($template);
 
         //THE VIDEO URL XML.
-        $videoURLXML = file_get_contents(__DIR__ . '/../MediaManager/Templates/video-sitemap-url.xml');
+        $videoURLXML = file_get_contents(__DIR__ . '/../Templates/video-sitemap-url.xml');
 
         //BUILD THE XML STRING.
         $videoXML = '';
