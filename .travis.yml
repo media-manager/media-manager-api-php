@@ -10,8 +10,10 @@ matrix:
         - php: nightly
         - php: hhvm
 before_script:
+    - mkdir -p build/logs
+    - composer require satooshi/php-coveralls:~0.6@stable
     - composer install
-before_install:
-  - pip install --user codecov
+script:
+  - phpunit --coverage-clover build/logs/clover.xml
 after_success:
-  - codecov
+  - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then php vendor/bin/coveralls -v; fi;'
