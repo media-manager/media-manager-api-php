@@ -1,4 +1,5 @@
 <?php
+
 use MediaManager\HTTP\HTTP as HTTP;
 
 /**
@@ -6,7 +7,6 @@ use MediaManager\HTTP\HTTP as HTTP;
  */
 class HTTPTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * Test setting of global parameters.
      */
@@ -87,7 +87,6 @@ class HTTPTest extends PHPUnit_Framework_TestCase
 
         //Check BasicAuth is returned
         $this->assertInstanceOf("MediaManager\HTTP\BasicAuth", $CurlRequestGET->getBasicAuth());
-
     }
 
     /**

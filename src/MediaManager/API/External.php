@@ -9,11 +9,11 @@ namespace MediaManager\API;
  */
 class External extends API
 {
-
     /**
      * Create External API object.
-     * @param type $client
-     * @param type $apiKey
+     *
+     * @param type                      $client
+     * @param type                      $apiKey
      * @param MediaManager\HTTP\Request $request
      */
     public function __construct($client, $apiKey, $request)
@@ -28,10 +28,10 @@ class External extends API
      */
     public function getTemplateMostViewedVideos($template)
     {
-        $api = '/external/template/' . $template . '/videos/mostviewed';
+        $api = '/external/template/'.$template.'/videos/mostviewed';
 
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
+        $this->request->setURL($this->BASE_URI.$api);
 
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
@@ -46,10 +46,10 @@ class External extends API
      */
     public function recommendTemplateVideo($template, $videoid)
     {
-        $api = '/external/template/' . $template . "/videos/recommend/{$videoid}";
+        $api = '/external/template/'.$template."/videos/recommend/{$videoid}";
 
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
+        $this->request->setURL($this->BASE_URI.$api);
 
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
@@ -66,10 +66,10 @@ class External extends API
      */
     public function getTemplateLatestVideos($template)
     {
-        $api = '/external/template/' . $template . '/videos/latest';
+        $api = '/external/template/'.$template.'/videos/latest';
 
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
+        $this->request->setURL($this->BASE_URI.$api);
 
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
@@ -95,10 +95,10 @@ class External extends API
         //SET THE TERM PARAM
         $this->HTTP->setGlobalParams(['term' => implode(',', $term)]);
 
-        $api = '/external/template/' . $template . '/video/search';
+        $api = '/external/template/'.$template.'/video/search';
 
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
+        $this->request->setURL($this->BASE_URI.$api);
 
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
@@ -114,10 +114,10 @@ class External extends API
      */
     public function getTemplateVideo($template, $videoid)
     {
-        $api = '/external/template/' . $template . "/video/{$videoid}";
+        $api = '/external/template/'.$template."/video/{$videoid}";
 
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
+        $this->request->setURL($this->BASE_URI.$api);
 
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
@@ -134,10 +134,10 @@ class External extends API
      */
     public function getTemplateVideos($template)
     {
-        $api = '/external/template/' . $template . '/videos';
+        $api = '/external/template/'.$template.'/videos';
 
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
+        $this->request->setURL($this->BASE_URI.$api);
 
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
@@ -154,10 +154,10 @@ class External extends API
      */
     public function getTemplateAudios($template)
     {
-        $api = '/external/template/' . $template . '/audios';
+        $api = '/external/template/'.$template.'/audios';
 
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
+        $this->request->setURL($this->BASE_URI.$api);
 
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
@@ -181,7 +181,7 @@ class External extends API
         $this->HTTP->setGlobalParams(['templateID' => $template]);
 
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
+        $this->request->setURL($this->BASE_URI.$api);
 
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
@@ -205,7 +205,7 @@ class External extends API
         $this->HTTP->setGlobalParams(['templateID' => $template]);
 
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
+        $this->request->setURL($this->BASE_URI.$api);
 
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
@@ -229,7 +229,7 @@ class External extends API
         $this->HTTP->setGlobalParams(['templateID' => $template]);
 
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
+        $this->request->setURL($this->BASE_URI.$api);
 
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
@@ -253,7 +253,7 @@ class External extends API
         $this->HTTP->setGlobalParams(['templateID' => $template]);
 
         //Set the request URL to clients API
-        $this->request->setURL($this->BASE_URI . $api);
+        $this->request->setURL($this->BASE_URI.$api);
 
         //GET CLIENT DATA
         $response = $this->HTTP->Get();
@@ -274,7 +274,7 @@ class External extends API
         $videos = $this->getTemplateVideos($template);
 
         //THE VIDEO URL XML.
-        $videoURLXML = file_get_contents(__DIR__ . '/../Templates/video-sitemap-url.xml');
+        $videoURLXML = file_get_contents(__DIR__.'/../Templates/video-sitemap-url.xml');
 
         //BUILD THE XML STRING.
         $videoXML = '';
@@ -282,8 +282,8 @@ class External extends API
         foreach ($videos['data'] as $video) {
 
             //SET THE LOCATION
-            $video['location'] = 'https://' . $this->client . '.getmediamanager.com/video/' . $video['_id'];
-            $video['playerlocation'] = $video['location'] . '?autoplay=false';
+            $video['location'] = 'https://'.$this->client.'.getmediamanager.com/video/'.$video['_id'];
+            $video['playerlocation'] = $video['location'].'?autoplay=false';
             $video['filelocation'] = $video['videoFiles']['http']['mp4']['360'];
 
             //SET THE URL ROW
@@ -293,7 +293,7 @@ class External extends API
 
             foreach ($keys as $key) {
                 if (is_string($video[$key]) || is_numeric($video[$key])) {
-                    $urlRow = str_replace('{' . $key . '}', htmlspecialchars($video[$key]), $urlRow);
+                    $urlRow = str_replace('{'.$key.'}', htmlspecialchars($video[$key]), $urlRow);
                 }
             }
 

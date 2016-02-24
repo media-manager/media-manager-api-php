@@ -2,24 +2,25 @@
 
 class APITest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * Create a mock CurlRequest that returns given string data for doRequest.
+     *
      * @param string $requestResponse The string to be returned by response.
+     *
      * @return MediaManager\HTTP\CurlRequest
      */
     private function getMockRequest($requestResponse)
     {
         $request = $this->getMockBuilder("MediaManager\HTTP\CurlRequest")
-            ->setConstructorArgs(array("www.example.com"))
+            ->setConstructorArgs(['www.example.com'])
             ->getMock();
 
         $request->expects($this->any())
             ->method('getData')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
 
         $request->expects($this->any())
-            ->method("doRequest")
+            ->method('doRequest')
             ->will($this->returnValue($requestResponse));
 
         return $request;
@@ -30,10 +31,9 @@ class APITest extends PHPUnit_Framework_TestCase
      */
     public function testAPIObject()
     {
-
         $request = $this->getMockRequest('{"foo": "bar"}');
 
-        $API = new \MediaManager\API\API("foo", "bar", $request);
+        $API = new \MediaManager\API\API('foo', 'bar', $request);
 
         //Assert instance of analytics method is correct.
         $this->assertInstanceOf("MediaManager\Analytics\Analytics", $API->analytics());
@@ -42,16 +42,16 @@ class APITest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf("MediaManager\HTTP\HTTP", $API->getHTTP());
 
         //Test adding of global filters
-        $API->addFilter("foo", "bar");
-        $this->assertEquals(["foo" => "bar", "_apikey" => "bar"], $API->getHTTP()->getGlobalParams());
+        $API->addFilter('foo', 'bar');
+        $this->assertEquals(['foo' => 'bar', '_apikey' => 'bar'], $API->getHTTP()->getGlobalParams());
 
         //Add the playlist filter
-        $API->addPlaylistFilter("playlist");
-        $this->assertEquals(["foo" => "bar", "_apikey" => "bar", "playlist" => "playlist"], $API->getHTTP()->getGlobalParams());
+        $API->addPlaylistFilter('playlist');
+        $this->assertEquals(['foo' => 'bar', '_apikey' => 'bar', 'playlist' => 'playlist'], $API->getHTTP()->getGlobalParams());
 
         //Add the template filter.
-        $API->addTemplateFilter("template");
-        $this->assertEquals(["foo" => "bar", "_apikey" => "bar", "playlist" => "playlist", "templateID" => "template"], $API->getHTTP()->getGlobalParams());
+        $API->addTemplateFilter('template');
+        $this->assertEquals(['foo' => 'bar', '_apikey' => 'bar', 'playlist' => 'playlist', 'templateID' => 'template'], $API->getHTTP()->getGlobalParams());
     }
 
     /**
@@ -64,12 +64,12 @@ class APITest extends PHPUnit_Framework_TestCase
         $request = $this->getMockRequest('{"total": 0, "per_page": 10, "current_page": 1, "last_page": 2, "from": 0, "to": 0, "data": []}');
 
         //Create api object.
-        $API = new \MediaManager\API\API("foo", "bar", $request);
+        $API = new \MediaManager\API\API('foo', 'bar', $request);
 
         //Assert an array is returned.
         $this->assertTrue(is_array($API->getClient()));
         $this->assertTrue(is_array($API->getTemplates()));
-        $this->assertTrue(is_array($API->getVideo("video")));
+        $this->assertTrue(is_array($API->getVideo('video')));
         $this->assertTrue(is_array($API->getPlaylists()));
 
         $this->assertInstanceOf("MediaManager\Pager\Pager", $API->getVideos());
