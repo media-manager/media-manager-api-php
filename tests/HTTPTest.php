@@ -121,11 +121,4 @@ class HTTPTest extends PHPUnit_Framework_TestCase
         $JsonObject->setJson('{"error": "Invalid error format"}');
         $this->assertEquals('Unknown', $JsonObject->getErrorMessage());
     }
-
-    /**
-     * Test the HTTP Object.
-     */
-    public function testHTTPObject()
-    {
-    }
 }

@@ -6,25 +6,26 @@ use MediaManager\API\API as API;
 use MediaManager\API\External as External;
 
 /**
- * Description of MediaManager.
+ * The Media Manager object to access external or general API.
  *
  * @author Dale
  */
 class MediaManager
 {
     /**
-     * The API Object.
+     * The api key and client shortname.
      *
-     * @var API
+     * @var string
      */
-    public $API;
+    private $apikey;
+    private $client;
 
     /**
-     * The API Object.
+     * The request gateway.
      *
-     * @var API
+     * @var \MediaManager\HTTP\CurlRequest
      */
-    public $ExternalAPI;
+    private $request;
 
     /**
      * Media Manager Object.
@@ -32,9 +33,50 @@ class MediaManager
      * @param type $client
      * @param type $apiKey
      */
-    public function __construct($client, $apiKey)
+    public function __construct($client, $apiKey, \MediaManager\HTTP\CurlRequest $request)
     {
-        $this->API = new API($client, $apiKey);
-        $this->ExternalAPI = new External($client, $apiKey);
+        $this->apikey = $apiKey;
+        $this->client = $client;
+        $this->request = $request;
+    }
+
+    /**
+     * Get the API object.
+     *
+     * @return API
+     */
+    public function api()
+    {
+        return new API($this->client, $this->apikey, $this->request);
+    }
+
+    /**
+     * Get the External object.
+     *
+     * @return External
+     */
+    public function external()
+    {
+        return new External($this->client, $this->apikey, $this->request);
+    }
+
+    /**
+     * Get the APIKey.
+     *
+     * @return string
+     */
+    public function getAPIKey()
+    {
+        return $this->apikey;
+    }
+
+    /**
+     * Get the client shortname.
+     *
+     * @return string
+     */
+    public function getClient()
+    {
+        return $this->client;
     }
 }

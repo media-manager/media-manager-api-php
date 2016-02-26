@@ -32,21 +32,21 @@ class API
      *
      * @var type
      */
-    private $apiVersion = 1;
+    protected $apiVersion = 1;
 
     /**
      * Use a CurlRequest.
      *
-     * @var CurlRequest
+     * @var MediaManager\HTTP\CurlRequest
      */
-    private $request;
+    protected $request;
 
     /**
      * The API Key.
      *
      * @var type
      */
-    private $apiKey;
+    protected $apiKey;
 
     /**
      * The Base URI for the API.
@@ -56,23 +56,24 @@ class API
     protected $BASE_URI = 'https://{client}.getmediamanager.com/api/v{version}';
 
     /**
-     * A API Object.
+     * Create new API instance.
      *
-     * @param type $client
-     * @param type $version
+     * @param string                         $client  The client shortname
+     * @param string                         $apiKey  The API Key
+     * @param \MediaManager\HTTP\CurlRequest $request
      */
-    public function __construct($client, $apiKey, $version = 1)
+    public function __construct($client, $apiKey, \MediaManager\HTTP\CurlRequest $request)
     {
         //Set the global fields.
         $this->client = $client;
-        $this->apiVersion = $version;
         $this->apiKey = $apiKey;
 
         //Parse the base uri based on client and version.
-        $this->BASE_URI = str_replace(['{client}', '{version}'], [$client, $version], $this->BASE_URI);
+        $this->BASE_URI = str_replace(['{client}', '{version}'], [$this->client, $this->apiVersion], $this->BASE_URI);
 
         //The CurlRequest Object
-        $this->request = new \MediaManager\HTTP\CurlRequest($this->BASE_URI);
+        $this->request = $request;
+        $this->request->setURL($this->BASE_URI, true);
 
         //ATTACH THE HTTP OBJECT
         $this->HTTP = new HTTP($this->request);
@@ -86,9 +87,19 @@ class API
      *
      * @return Analytics
      */
-    public function Analytics()
+    public function analytics()
     {
         return new Analytics($this->HTTP);
+    }
+
+    /**
+     * Get the HTTP Object.
+     *
+     * @return HTTP
+     */
+    public function getHTTP()
+    {
+        return $this->HTTP;
     }
 
     /**
@@ -125,7 +136,7 @@ class API
     /**
      * Get client data.
      *
-     * @return type
+     * @return array
      */
     public function getClient()
     {

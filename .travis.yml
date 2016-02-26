@@ -9,7 +9,5 @@ matrix:
     allow_failures:
         - php: nightly
         - php: hhvm
-before_script:
+install:
     - composer install
-after_success:
-  - bash <(curl -s https://codecov.io/bash)

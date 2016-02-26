@@ -9,9 +9,16 @@ namespace MediaManager\API;
  */
 class External extends API
 {
-    public function __construct($client, $apiKey, $version = 1)
+    /**
+     * Create External API object.
+     *
+     * @param type                      $client
+     * @param type                      $apiKey
+     * @param MediaManager\HTTP\Request $request
+     */
+    public function __construct($client, $apiKey, $request)
     {
-        parent::__construct($client, $apiKey, $version);
+        parent::__construct($client, $apiKey, $request);
     }
 
     /**
@@ -267,7 +274,7 @@ class External extends API
         $videos = $this->getTemplateVideos($template);
 
         //THE VIDEO URL XML.
-        $videoURLXML = file_get_contents('MediaManager/Templates/video-sitemap-url.xml');
+        $videoURLXML = file_get_contents(__DIR__.'/../Templates/video-sitemap-url.xml');
 
         //BUILD THE XML STRING.
         $videoXML = '';

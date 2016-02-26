@@ -21,7 +21,7 @@ class CurlRequest
      *
      * @param type $url
      */
-    public function __construct($url, $type = 'GET')
+    public function __construct($url = null, $type = 'GET')
     {
         //Original URL. Sometimes URL may be appended
         $this->initalUrl = $url;
@@ -59,9 +59,12 @@ class CurlRequest
      *
      * @param type $url
      */
-    public function setURL($url)
+    public function setURL($url, $initial = false)
     {
         $this->url = $url;
+        if ($initial) {
+            $this->initalUrl = $initial;
+        }
     }
 
     /**
