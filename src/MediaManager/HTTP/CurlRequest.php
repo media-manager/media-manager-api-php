@@ -3,7 +3,7 @@
 namespace MediaManager\HTTP;
 
 /**
- * A CurlRequest, which can be anything from a GET,POST or PUT request and also 
+ * A CurlRequest, which can be anything from a GET,POST or PUT request and also
  * allows sending of files.
  */
 class CurlRequest

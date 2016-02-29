@@ -3,7 +3,7 @@
 class MediaManagerTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Test the Media Manager object. 
+     * Test the Media Manager object.
      */
     public function testMediaManagerObject()
     {
