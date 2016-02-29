@@ -51,7 +51,7 @@ class API
     /**
      * The Base URI for the API.
      *
-     * @var type
+     * @var string
      */
     protected $BASE_URI = 'https://{client}.getmediamanager.com/api/v{version}';
 
