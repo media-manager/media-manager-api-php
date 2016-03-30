@@ -23,14 +23,14 @@ class API
     /**
      * The Client Shortname.
      *
-     * @var type
+     * @var string
      */
     protected $client;
 
     /**
      * The API Version.
      *
-     * @var type
+     * @var string
      */
     protected $apiVersion = 1;
 
@@ -44,14 +44,14 @@ class API
     /**
      * The API Key.
      *
-     * @var type
+     * @var string
      */
     protected $apiKey;
 
     /**
      * The Base URI for the API.
      *
-     * @var type
+     * @var string
      */
     protected $BASE_URI = 'https://{client}.getmediamanager.com/api/v{version}';
 
@@ -105,8 +105,8 @@ class API
     /**
      * Add a filter to API calls.
      *
-     * @param type $filterName
-     * @param type $filterValue
+     * @param string $filterName
+     * @param string $filterValue
      */
     public function addFilter($filterName, $filterValue)
     {
@@ -116,7 +116,7 @@ class API
     /**
      * Filter down by a playlist.
      *
-     * @param type $playlist
+     * @param string $playlist
      */
     public function addPlaylistFilter($playlist)
     {
@@ -126,7 +126,7 @@ class API
     /**
      * Add a template filter.
      *
-     * @param type $template
+     * @param string $template
      */
     public function addTemplateFilter($template)
     {
@@ -150,7 +150,11 @@ class API
 
         return $response;
     }
-
+    
+    /**
+     * Get templates attached to account.
+     * @return array
+     */
     public function getTemplates()
     {
         $api = '/templates';
@@ -166,9 +170,9 @@ class API
     /**
      * Get Video data.
      *
-     * @param type $videoid
+     * @param string $videoid
      *
-     * @return type
+     * @return array
      */
     public function getVideo($videoid)
     {
@@ -182,7 +186,11 @@ class API
 
         return $response;
     }
-
+    
+    /**
+     * Get all playlists attached to account.
+     * @return array
+     */
     public function getPlaylists()
     {
         $api = '/playlists';
@@ -199,7 +207,7 @@ class API
     /**
      * Get client videos. This will be paged.
      *
-     * @return type
+     * @return array
      */
     public function getVideos()
     {
