@@ -12,8 +12,8 @@ class External extends API
     /**
      * Create External API object.
      *
-     * @param type                      $client
-     * @param type                      $apiKey
+     * @param string                      $client
+     * @param string                      $apiKey
      * @param MediaManager\HTTP\Request $request
      */
     public function __construct($client, $apiKey, $request)
@@ -23,8 +23,10 @@ class External extends API
 
     /**
      * Get most viewed videos on given template.
-     *
-     * @return type
+     * 
+     * @param string template
+     * 
+     * @return array
      */
     public function getTemplateMostViewedVideos($template)
     {
@@ -42,7 +44,7 @@ class External extends API
     /**
      * Get most viewed videos on given template.
      *
-     * @return type
+     * @return array
      */
     public function recommendTemplateVideo($template, $videoid)
     {
@@ -60,9 +62,9 @@ class External extends API
     /**
      * Get the latest videos on template.
      *
-     * @param type $template
+     * @param string $template
      *
-     * @return type
+     * @return array
      */
     public function getTemplateLatestVideos($template)
     {
@@ -80,9 +82,10 @@ class External extends API
     /**
      * Get the latest videos on template.
      *
-     * @param type $template
+     * @param string $template
+     * @param array $term
      *
-     * @return type
+     * @return array
      */
     public function searchTemplateVideos($template, array $term)
     {
@@ -109,8 +112,10 @@ class External extends API
     /**
      * Get details of video on template.
      *
-     * @param type $template
-     * @param type $videoid
+     * @param string $template
+     * @param string $videoid
+     * 
+     * @return array
      */
     public function getTemplateVideo($template, $videoid)
     {
@@ -128,9 +133,9 @@ class External extends API
     /**
      * Get all videos published to the external template.
      *
-     * @param type $template
+     * @param string $template
      *
-     * @return type
+     * @return array
      */
     public function getTemplateVideos($template)
     {
@@ -148,9 +153,9 @@ class External extends API
     /**
      * Get all audios published to external template.
      *
-     * @param type $template
+     * @param string $template
      *
-     * @return type
+     * @return array
      */
     public function getTemplateAudios($template)
     {
@@ -168,10 +173,10 @@ class External extends API
     /**
      * Get all videos that are published to a given playlist on a given template.
      *
-     * @param type $playlist
-     * @param type $template
+     * @param string $playlist
+     * @param string $template
      *
-     * @return type
+     * @return array
      */
     public function getPlaylistVideosOnTemplate($playlist, $template)
     {
@@ -192,10 +197,10 @@ class External extends API
     /**
      * Get all videos that are published to a given playlist on a given template.
      *
-     * @param type $playlist
-     * @param type $template
+     * @param string $playlist
+     * @param string $template
      *
-     * @return type
+     * @return array
      */
     public function getPlaylistAudiosOnTemplate($playlist, $template)
     {
@@ -216,10 +221,11 @@ class External extends API
     /**
      * Get all videos that are published to a given playlist on a given template.
      *
-     * @param type $playlist
-     * @param type $template
+     * @param string $playlist
+     * @param string $template
+     * @param string $videoid
      *
-     * @return type
+     * @return array
      */
     public function getPlaylistVideoOnTemplate($playlist, $template, $videoid)
     {
@@ -240,10 +246,11 @@ class External extends API
     /**
      * Get all videos that are published to a given playlist on a given template.
      *
-     * @param type $playlist
-     * @param type $template
+     * @param string $playlist
+     * @param string $template
+     * @param string $audioid
      *
-     * @return type
+     * @return array
      */
     public function getPlaylistAudioOnTemplate($playlist, $template, $audioid)
     {
@@ -264,7 +271,7 @@ class External extends API
     /**
      * Generate the sitemap for template.
      *
-     * @param type $template
+     * @param string $template
      */
     public function generateTemplateSitemap($template, $location = '')
     {
