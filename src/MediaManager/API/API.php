@@ -150,9 +150,10 @@ class API
 
         return $response;
     }
-    
+
     /**
      * Get templates attached to account.
+     *
      * @return array
      */
     public function getTemplates()
@@ -186,9 +187,10 @@ class API
 
         return $response;
     }
-    
+
     /**
      * Get all playlists attached to account.
+     *
      * @return array
      */
     public function getPlaylists()

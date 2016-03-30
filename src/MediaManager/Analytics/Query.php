@@ -21,9 +21,6 @@ class Query
      */
     private $Show;
 
-    /**
-     * 
-     */
     public function __construct()
     {
         //Set the default show query
