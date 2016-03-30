@@ -12,8 +12,8 @@ class External extends API
     /**
      * Create External API object.
      *
-     * @param string                      $client
-     * @param string                      $apiKey
+     * @param string                    $client
+     * @param string                    $apiKey
      * @param MediaManager\HTTP\Request $request
      */
     public function __construct($client, $apiKey, $request)
@@ -23,9 +23,9 @@ class External extends API
 
     /**
      * Get most viewed videos on given template.
-     * 
+     *
      * @param string template
-     * 
+     *
      * @return array
      */
     public function getTemplateMostViewedVideos($template)
@@ -83,7 +83,7 @@ class External extends API
      * Get the latest videos on template.
      *
      * @param string $template
-     * @param array $term
+     * @param array  $term
      *
      * @return array
      */
@@ -114,7 +114,7 @@ class External extends API
      *
      * @param string $template
      * @param string $videoid
-     * 
+     *
      * @return array
      */
     public function getTemplateVideo($template, $videoid)

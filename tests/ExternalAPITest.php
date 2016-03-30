@@ -52,7 +52,7 @@ class ExternalAPITest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Teardown things that need to be removed like the sitemap.xml file 
+     * Teardown things that need to be removed like the sitemap.xml file
      * after test.
      */
     public function tearDown()
