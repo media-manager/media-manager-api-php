@@ -27,9 +27,10 @@ class Analytics
     }
 
     /**
-    * Query the Media Manager api.
-    * @param \MediaManager\Analytics\Query
-    */
+     * Query the Media Manager api.
+     *
+     * @param \MediaManager\Analytics\Query
+     */
     public function query(\MediaManager\Analytics\Query $Query)
     {
         $api = '/analytics/'.$Query->get().'/'.$Query->getFrom()->get().'/'.$Query->getTo()->get();
